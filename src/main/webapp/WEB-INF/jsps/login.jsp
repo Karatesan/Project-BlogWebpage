@@ -16,7 +16,7 @@
 			<img class="author2" src="pictures/Gamer2.png">
 		</div>
 <div class="in-center">
-	<h3>Lognn</h3>
+	<h3>Login</h3>
 	
 		
 

@@ -5,15 +5,25 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.fdmgroup.GameBlog.model.BlogPost;
+import com.fdmgroup.GameBlog.model.User;
+import com.fdmgroup.GameBlog.security.DefaultUserDetailService;
 import com.fdmgroup.GameBlog.service.BlogPostService;
 
 public class BlogPostController {
 	
 	@Autowired
 	private BlogPostService blogPostService;
+	
+	@Autowired
+	private User user;
+	
+	@Autowired
+	DefaultUserDetailService defaultUserDetailService;
 	
 	@GetMapping("/posts/{id}")
 	public String getPost(@PathVariable Integer id, Model model) {
@@ -27,7 +37,25 @@ public class BlogPostController {
 		else {
 			return "404";
 		}
-		
+	}
+	
+	@GetMapping("/posts/new")
+	public String createNewPost(Model model) {
+		Optional<User> optionalUser = defaultUserDetailService.findByEmail("to fill later");
+		if (optionalUser.isPresent()) {
+			BlogPost newBlogPost = new BlogPost();
+			newBlogPost.setAuthor(optionalUser.get());
+			model.addAttribute("newPost", newBlogPost);
+			return "new_post";
+		}
+		else {
+			return "404";
+		}
 	}
 
+	@PostMapping("/posts/new")
+	public String saveNewPost (@ModelAttribute BlogPost blogPost) {
+		blogPostService.savePost(blogPost);
+		return "redirect:/posts/"+blogPost.getBlogPostId();
+	}
 }

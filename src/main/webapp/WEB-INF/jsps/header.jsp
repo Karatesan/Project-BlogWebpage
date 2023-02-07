@@ -55,9 +55,9 @@
             <div class="navbar-searchBar">
                 <input class="search-bar" type="search" id="search-bar" name="search" placeholder="Search">
             </div>
-            <a class='button'>Home</a>
-            <a class='button'>About</a>
-            <a class='button'>Contact</a>
+            <a href="/" class='button'>Home</a>
+            <a href="/about" class='button'>About</a>
+            <a href="mailto:maciej.gomulec@fdmgroup.com" class='button'>Contact</a>
             <a class='button support'>Patreon</a>
         </div>
     </div>
