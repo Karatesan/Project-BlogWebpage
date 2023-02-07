@@ -1,45 +1,51 @@
 package com.fdmgroup.GameBlog.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class BlogEntry {
+public class BlogPost {
 	
 	@Id
-	@GeneratedValue
-	private int blogEntryId;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Integer blogPostId;
 	@ManyToOne
 	private User author;
 	private String title;
+	@Column(columnDefinition = "TEXT")
 	private String content;
 	private int likes;
-	private LocalDate postDate;
+	private LocalDate postedAt;
+	//image
 	
-	public BlogEntry() {}
-	
-	
-	public BlogEntry(User author, String title, String content, int likes, LocalDate postDate) {
+	public BlogPost(User author, String title, String content, int likes, LocalDate postedAt) {
 		super();
 		this.author = author;
 		this.title = title;
 		this.content = content;
 		this.likes = likes;
-		this.postDate = postDate;
+		this.postedAt = postedAt;
 	}
-	public int getBlogEntryId() {
-		return blogEntryId;
+	
+	
+	public Integer getBlogPostId() {
+		return blogPostId;
 	}
-	public void setBlogEntryId(int blogEntryId) {
-		this.blogEntryId = blogEntryId;
+
+	public void setBlogPostId(Integer blogPostId) {
+		this.blogPostId = blogPostId;
 	}
+
 	public User getAuthor() {
 		return author;
-	}
+	}	
 	public void setAuthor(User author) {
 		this.author = author;
 	}
@@ -61,16 +67,11 @@ public class BlogEntry {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-	public LocalDate getPostDate() {
-		return postDate;
+	public LocalDate getPostedAt() {
+		return postedAt;
 	}
-	public void setPostDate(LocalDate postDate) {
-		this.postDate = postDate;
+	public void setPostedAt(LocalDate postedAt) {
+		this.postedAt = postedAt;
 	}
 	
-	//image
-	
-	
-	
-
 }

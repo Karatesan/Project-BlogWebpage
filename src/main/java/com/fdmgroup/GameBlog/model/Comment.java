@@ -14,7 +14,7 @@ public class Comment {
 	@GeneratedValue
 	private int commentId;
 	@ManyToOne
-	private BlogEntry article;
+	private BlogPost article;
 //	@ManyToOne
 //	private Comment parentComment;
 //	@OneToMany
@@ -29,7 +29,7 @@ public class Comment {
 	
 	
 
-	public Comment( BlogEntry articleId, String content, User commenter,  LocalDateTime date) {
+	public Comment( BlogPost articleId, String content, User commenter,  LocalDateTime date) {
 		super();
 		this.article = articleId;
 		this.content = content;
@@ -43,10 +43,10 @@ public class Comment {
 	public void setCommentId(int commentId) {
 		this.commentId = commentId;
 	}
-	public BlogEntry getArticleId() {
+	public BlogPost getArticleId() {
 		return article;
 	}
-	public void setArticle(BlogEntry articleId) {
+	public void setArticle(BlogPost articleId) {
 		this.article = articleId;
 	}
 	public String getContent() {

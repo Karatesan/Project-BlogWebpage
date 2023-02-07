@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fdmgroup.GameBlog.model.BlogPost;
 import com.fdmgroup.GameBlog.model.Comment;
 import com.fdmgroup.GameBlog.model.User;
 import com.fdmgroup.GameBlog.service.CommentService;
@@ -28,7 +29,7 @@ public class CommentComtroller {
 	
 	
 	@PostMapping
-	public String addComment(ModelMap model, @RequestParam String username, @RequestParam int articleId, @RequestParam String content) {
+	public String addComment(ModelMap model, @RequestParam String username, @RequestParam BlogPost articleId, @RequestParam String content) {
 		
 		User commenter = userService.findByUsername(username);
 		LocalDateTime date = LocalDateTime.of(LocalDate.now(), LocalTime.now());
