@@ -2,6 +2,7 @@ package com.fdmgroup.GameBlog.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class BlogPost {
@@ -23,6 +25,8 @@ public class BlogPost {
 	private String content;
 	private int likes;
 	private LocalDate postedAt;
+	@OneToMany 
+	private List<Comment>comments;
 	//image
 	
 	public BlogPost(User author, String title, String content, int likes, LocalDate postedAt) {

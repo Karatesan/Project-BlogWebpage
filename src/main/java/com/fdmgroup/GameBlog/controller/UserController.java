@@ -50,24 +50,25 @@ public class UserController {
 	}
 		
 	@PostMapping("/register")
-	public String registerUser(@ModelAttribute("user") User user, @RequestParam String confirmPassword, ModelMap model) {
-		User userFromDatabase = defaultUserService.findByUsername(user.getUsername());
+	public String registerUser(@RequestParam String username, @RequestParam String password, @RequestParam String email, @RequestParam String confirmPassword, ModelMap model) {
+		User userFromDatabase = defaultUserService.findByUsername(username);
 		
-		if(userFromDatabase.getUsername().equals(user.getUsername()) || user.getUsername().equals("anonymousUser") || user.getUsername().equals("default username")) {
+		if(userFromDatabase.getUsername().equals(username) || username.equals("anonymousUser") || username.equals("default username")) {
 			model.addAttribute("errorMessage", "This user name already exists");
 			return "register";
 		}
 		
-		if(!user.getPassword().equals(confirmPassword)) {
+		if(!password.equals(confirmPassword)) {
 			model.addAttribute("errorMessage", "Entries in Password and Confirm Password are not the same");
 			return "register";	
 		}
+		
+		User newUser = new User(username, password, email, confirmPassword, null);
 				
-		user.setRole(roleService.findByRoleName("Customer"));
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		defaultUserService.saveUser(user);
-		
-		
+		newUser.setRole(roleService.findByRoleName("Reader"));
+		newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+		defaultUserService.saveUser(newUser);
+
 		return "index";
 	}
 

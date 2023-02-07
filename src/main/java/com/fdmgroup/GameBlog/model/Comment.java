@@ -14,9 +14,7 @@ public class Comment {
 	@GeneratedValue
 	private int commentId;
 	@ManyToOne
-	private BlogPost article;
-//	@ManyToOne
-//	private Comment parentComment;
+	private BlogPost blogPost;
 //	@OneToMany
 //	private List<Comment> childComments;
 	private String content;
@@ -29,9 +27,9 @@ public class Comment {
 	
 	
 
-	public Comment( BlogPost articleId, String content, User commenter,  LocalDateTime date) {
+	public Comment( BlogPost post, String content, User commenter,  LocalDateTime date) {
 		super();
-		this.article = articleId;
+		this.blogPost = post;
 		this.content = content;
 		this.commenter = commenter;
 		this.date = date;
@@ -44,10 +42,10 @@ public class Comment {
 		this.commentId = commentId;
 	}
 	public BlogPost getArticleId() {
-		return article;
+		return blogPost;
 	}
 	public void setArticle(BlogPost articleId) {
-		this.article = articleId;
+		this.blogPost = articleId;
 	}
 	public String getContent() {
 		return content;
@@ -72,7 +70,7 @@ public class Comment {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(article, commentId, commenter, content, date);
+		return Objects.hash(blogPost, commentId, commenter, content, date);
 	}
 
 	@Override
@@ -84,14 +82,14 @@ public class Comment {
 		if (getClass() != obj.getClass())
 			return false;
 		Comment other = (Comment) obj;
-		return Objects.equals(article, other.article) && commentId == other.commentId
+		return Objects.equals(blogPost, other.blogPost) && commentId == other.commentId
 				&& Objects.equals(commenter, other.commenter) && Objects.equals(content, other.content)
 				&& Objects.equals(date, other.date);
 	}
 
 	@Override
 	public String toString() {
-		return "Comment [commentId=" + commentId + ", article=" + article + ", content=" + content + ", commenter="
+		return "Comment [commentId=" + commentId + ", article=" + blogPost + ", content=" + content + ", commenter="
 				+ commenter + ", date=" + date + "]";
 	}
 	
