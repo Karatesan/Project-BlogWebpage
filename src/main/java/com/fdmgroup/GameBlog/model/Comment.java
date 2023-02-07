@@ -1,87 +1,98 @@
-//package com.fdmgroup.GameBlog.model;
-//
-//import java.time.LocalDate;
-//import java.util.List;
-//
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.Id;
-//
-//@Entity
-//public class Comment {
-//	@Id
-//	@GeneratedValue
-//	private int commentId;
-//	private String articleId;
-//	private String parentCommentId;
+package com.fdmgroup.GameBlog.model;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Comment {
+	@Id
+	@GeneratedValue
+	private int commentId;
+	@ManyToOne
+	private BlogEntry article;
+//	@ManyToOne
+//	private Comment parentComment;
+//	@OneToMany
 //	private List<Comment> childComments;
-//	private String content;
-//	private String commenterName;
-//	private String commenterEmail;
-//	private LocalDate date;
-//
-//	public String getArticleId() {
-//		return articleId;
-//	}
-//
-//	public void setArticleId(String articleId) {
-//		this.articleId = articleId;
-//	}
-//
-//	public int getCommentId() {
-//		return commentId;
-//	}
-//
-//	public void setCommentId(int commentId) {
-//		this.commentId = commentId;
-//	}
-//
-//	public String getParentCommentId() {
-//		return parentCommentId;
-//	}
-//
-//	public void setParentCommentId(String parentCommentId) {
-//		this.parentCommentId = parentCommentId;
-//	}
-//
-//	public List<Comment> getChildComments() {
-//		return childComments;
-//	}
-//
-//	public void setChildComments(List<Comment> childComments) {
-//		this.childComments = childComments;
-//	}
-//
-//	public String getContent() {
-//		return content;
-//	}
-//
-//	public void setContent(String content) {
-//		this.content = content;
-//	}
-//
-//	public String getCommenterName() {
-//		return commenterName;
-//	}
-//
-//	public void setCommenterName(String commenterName) {
-//		this.commenterName = commenterName;
-//	}
-//
-//	public String getCommenterEmail() {
-//		return commenterEmail;
-//	}
-//
-//	public void setCommenterEmail(String commenterEmail) {
-//		this.commenterEmail = commenterEmail;
-//	}
-//
-//	public LocalDate getDate() {
-//		return date;
-//	}
-//
-//	public void setDate(LocalDate date) {
-//		this.date = date;
-//	}
-//
-//}
+	private String content;
+	@ManyToOne
+	private User commenter;
+	//private String commenterEmail;
+	private LocalDateTime date;
+	
+	public Comment() {}
+	
+	
+
+	public Comment( BlogEntry articleId, String content, User commenter,  LocalDateTime date) {
+		super();
+		this.article = articleId;
+		this.content = content;
+		this.commenter = commenter;
+		this.date = date;
+	}
+
+	public int getCommentId() {
+		return commentId;
+	}
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
+	}
+	public BlogEntry getArticleId() {
+		return article;
+	}
+	public void setArticle(BlogEntry articleId) {
+		this.article = articleId;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public User getCommenter() {
+		return commenter;
+	}
+	public void setCommenter(User commenter) {
+		this.commenter = commenter;
+	}
+	public LocalDateTime getDate() {
+		return date;
+	}
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
+
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(article, commentId, commenter, content, date);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Comment other = (Comment) obj;
+		return Objects.equals(article, other.article) && commentId == other.commentId
+				&& Objects.equals(commenter, other.commenter) && Objects.equals(content, other.content)
+				&& Objects.equals(date, other.date);
+	}
+
+	@Override
+	public String toString() {
+		return "Comment [commentId=" + commentId + ", article=" + article + ", content=" + content + ", commenter="
+				+ commenter + ", date=" + date + "]";
+	}
+	
+}
