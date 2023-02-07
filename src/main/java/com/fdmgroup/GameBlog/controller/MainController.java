@@ -35,21 +35,13 @@ public class MainController {
 			
 	}
 	
-//	@GetMapping(value = "/")
-//	public String getIndex(ModelMap model) {
-//
-//		populateLoggedUserModel(model);
-//		
-//		
-//		List<Product> listOfTopProducts = showProductService.listTopSixProducts();
-//		model.addAttribute("searchedPhrase", "");
-//		model.addAttribute("city", "");
-//		model.addAttribute("startDate", "");
-//		model.addAttribute("endDate", "");
-//		model.addAttribute("topProducts", listOfTopProducts.stream().limit(6).toList());
-//		
-//		return "index";
-//	}
+	@GetMapping(value = "/")
+	public String getIndex(ModelMap model) {
+
+		populateLoggedUserModel(model);
+		
+		return "index";
+	}
 //	
 //	@GetMapping("/goToFAQ")
 //	public String toFAQ(ModelMap model) {

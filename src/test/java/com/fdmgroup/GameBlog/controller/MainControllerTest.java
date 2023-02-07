@@ -17,14 +17,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fdmgroup.GameBlog.Group4ProjectShazarApplication;
+import com.fdmgroup.GameBlog.Blog2manProjectApplication;
 import com.fdmgroup.GameBlog.controller.MainController;
 import com.fdmgroup.GameBlog.security.DefaultUserDetailService;
 
 @SpringBootTest(classes = { MainController.class })
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc(addFilters = false)
-@ContextConfiguration(classes = Group4ProjectShazarApplication.class)
+@ContextConfiguration(classes = Blog2manProjectApplication.class)
 public class MainControllerTest {
 
 	@MockBean
