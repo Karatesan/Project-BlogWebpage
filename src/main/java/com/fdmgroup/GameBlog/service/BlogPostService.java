@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fdmgroup.GameBlog.model.BlogPost;
 import com.fdmgroup.GameBlog.repository.BlogPostRepository;
-import com.fdmgroup.GameBlog.repository.IBlogPostService;
 
 public class BlogPostService implements IBlogPostService {
 	

@@ -29,6 +29,10 @@ public class BlogPost {
 	private List<Comment>comments;
 	//image
 	
+	public BlogPost() {
+		
+	}
+	
 	public BlogPost(User author, String title, String content, int likes, LocalDate postedAt) {
 		super();
 		this.author = author;

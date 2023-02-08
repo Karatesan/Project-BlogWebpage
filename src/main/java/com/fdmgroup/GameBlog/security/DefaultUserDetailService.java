@@ -29,11 +29,13 @@ public class DefaultUserDetailService implements UserDetailsService {
 	}
 	
 	public User findByUsername(String username) {
-		
 		Optional<User> optionalUser = userRepository.findByUsername(username);
 		User user = optionalUser.orElse(new User("default username"));
-		
 		return user;
+	}
+	
+	public Optional<User> findByEmail(String email){
+		return userRepository.findByEmail(email);
 	}
 	
 	public void saveUser(User user) {
@@ -42,7 +44,6 @@ public class DefaultUserDetailService implements UserDetailsService {
 	
 	public List<User> listAllUsers() {
 		List<User> allUsers = userRepository.findAll();
-		
 		return allUsers;
 	}
 

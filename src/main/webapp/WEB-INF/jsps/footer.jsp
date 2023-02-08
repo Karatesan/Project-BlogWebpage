@@ -10,7 +10,7 @@
 <body>
 	<footer >
 	<div class="foot-txt">
-		<a href="/toAboutShazar">About Shazar</a>
+		<a href="/toAboutGamer">About GamerBlog</a>
 		<a href="/goToFAQ">FAQ</a>
 		<a href="/toContact">Contact Us</a>
 		<a href="/toPrivacyPolicy">Privacy Policy</a>
