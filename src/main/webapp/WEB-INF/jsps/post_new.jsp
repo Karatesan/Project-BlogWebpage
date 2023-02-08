@@ -19,8 +19,7 @@
 	<span style="color: red">${errorMessage}</span>
 	<br>
 	<form action="/posts/new" method="post">
-		<input type="hidden" name="authorUsername" value="${ newPost.author }" /><br>
-		<input type="hidden" name="authorUsername" value="${ newPost.author }" /><br>
+		<input type="hidden" name="authorUsername" value="${ user.username }" /><br>
 		<label class="name-box">Title</label><br>
 		<input class="form-field" type="text" name="title" placeholder="Title"/><br>
 		<label class="name-box">Body of the post</label><br>

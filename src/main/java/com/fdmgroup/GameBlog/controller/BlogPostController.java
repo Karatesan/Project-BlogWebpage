@@ -1,5 +1,6 @@
 package com.fdmgroup.GameBlog.controller;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +37,13 @@ public class BlogPostController {
 	@GetMapping("/posts/new")
 	public String createNewPost(ModelMap model) {
 		mainController.populateLoggedUserModel(model);
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		User user = defaultUserDetailService.findByUsername(username);
-		System.out.println(user.getUsername()+"===================/n=================");
-		BlogPost newBlogPost = new BlogPost();
-		newBlogPost.setAuthor(user);
-		System.out.println(newBlogPost.getAuthor()+"WWWWWWWWWWWWWWWW /n WWWWWWWWWWWWWWWWWWW");
-		model.addAttribute("blogPost", newBlogPost);
+//		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+//		User user = defaultUserDetailService.findByUsername(username);
+//		System.out.println(user.getUsername()+"===================/n=================");
+//		BlogPost newBlogPost = new BlogPost();
+//		newBlogPost.setAuthor(user);
+//		System.out.println(newBlogPost.getAuthor()+"WWWWWWWWWWWWWWWW /n WWWWWWWWWWWWWWWWWWW");
+//		model.addAttribute("blogPost", newBlogPost);
 		return "post_new";
 	}		
 //		Optional<User> optionalUser = defaultUserDetailService.findByEmail("email authorized to create by security));
@@ -58,12 +59,17 @@ public class BlogPostController {
 
 
 	@PostMapping("/posts/new")
-	public String saveNewPost (@ModelAttribute BlogPost blogPost) {
+	public String saveNewPost (ModelMap model, @RequestParam String title, @RequestParam String content, @RequestParam String authorUsername) {
 		//tutaj lepiej zamias model atrtribute uzyj @request param dla ukrytych wartosci  itych wpisanych 
 		//w formie czyli authorUsername, title i content. Zmienilem w blog post i service na localDateTime - zawiera tez godziny
-		blogPostService.savePost(blogPost);
-		System.out.println(blogPost+"XXXXXXXXXXXXXXX /n XXXXXXXXXXXXXXXXXXXXX");
-		return "redirect:/posts/"+blogPost.getBlogPostId();
+		
+		User author = defaultUserDetailService.findByUsername(authorUsername);
+		LocalDateTime time = LocalDateTime.now();
+		
+		BlogPost newPost = new BlogPost(author, title, content, 0, time);
+		blogPostService.savePost(newPost);
+		mainController.populateLoggedUserModel(model);
+		return "index";
 	}
 	
 	@GetMapping("/posts/{id}")
