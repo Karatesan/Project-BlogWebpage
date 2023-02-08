@@ -1,14 +1,18 @@
 package com.fdmgroup.GameBlog.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.fdmgroup.GameBlog.model.BlogPost;
 import com.fdmgroup.GameBlog.repository.BlogPostRepository;
 
+@Service
 public class BlogPostService implements IBlogPostService {
 	
 	@Autowired
@@ -16,7 +20,7 @@ public class BlogPostService implements IBlogPostService {
 	
 	public BlogPost savePost (BlogPost blogPost) {
 		if(blogPost.getBlogPostId() == null) {
-			blogPost.setPostedAt(LocalDate.now());
+			blogPost.setPostedAt(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
 		}
 		return blogPostRepository.save(blogPost);
 	}

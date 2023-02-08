@@ -26,6 +26,7 @@
 					
 						<a class="italic"> ${user.username}</a>
 						<a href="/logout"><spring:message code="label.logout"/></a>
+						<a href="/posts/new">Add New Post</a>
 						<!-------------- SEE PROFILE------------------------- -->
 						<a href="/showProfile"><svg xmlns="http://www.w3.org/2000/svg"
 								width="25" height="25" fill="currentColor"
@@ -38,7 +39,7 @@
 
 						
 						
-						<a href="/goToAddPost">Add Post</a>
+					
 					</c:when>
 					<c:otherwise>
     <div class='navigation-bar'>

@@ -1,6 +1,5 @@
 package com.fdmgroup.GameBlog.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class BlogPost {
 	@Column(columnDefinition = "TEXT")
 	private String content;
 	private int likes;
-	private LocalDate postedAt;
+	private LocalDateTime postedAt;
 	@OneToMany 
 	private List<Comment>comments;
 	//image
@@ -33,7 +32,7 @@ public class BlogPost {
 		
 	}
 	
-	public BlogPost(User author, String title, String content, int likes, LocalDate postedAt) {
+	public BlogPost(User author, String title, String content, int likes, LocalDateTime postedAt) {
 		super();
 		this.author = author;
 		this.title = title;
@@ -75,10 +74,10 @@ public class BlogPost {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-	public LocalDate getPostedAt() {
+	public LocalDateTime getPostedAt() {
 		return postedAt;
 	}
-	public void setPostedAt(LocalDate postedAt) {
+	public void setPostedAt(LocalDateTime postedAt) {
 		this.postedAt = postedAt;
 	}
 	

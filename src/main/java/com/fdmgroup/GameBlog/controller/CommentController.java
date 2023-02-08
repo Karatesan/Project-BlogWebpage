@@ -1,10 +1,12 @@
 package com.fdmgroup.GameBlog.controller;
 
 import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,11 +21,11 @@ import com.fdmgroup.GameBlog.model.Comment;
 import com.fdmgroup.GameBlog.model.User;
 import com.fdmgroup.GameBlog.service.BlogPostService;
 import com.fdmgroup.GameBlog.service.CommentService;
-
 import com.fdmgroup.GameBlog.controller.MainController;
 import com.fdmgroup.GameBlog.security.DefaultUserDetailService;
 
-public class CommentComtroller {
+@Controller
+public class CommentController {
 	
 	@Autowired
 	private CommentService service;
@@ -37,7 +39,7 @@ public class CommentComtroller {
 	@Autowired
 	private BlogPostService blogService;
 	
-	@PostMapping
+	@PostMapping("/addComment")
 	public String addComment(ModelMap model, @RequestParam String username, @RequestParam int articleId, @RequestParam String content) {
 		
 		User commenter = userService.findByUsername(username);
@@ -53,7 +55,7 @@ public class CommentComtroller {
 		return null;
 	}
 	
-	@PostMapping
+	@PostMapping("/removeComment")
 	public String removeComment(ModelMap model, @RequestParam int commentId) {
 		
 		
@@ -61,7 +63,7 @@ public class CommentComtroller {
 		return null;
 	}
 	
-	 @PostMapping
+	 @PostMapping("/showAllComments")
 	    public String showComments(@PathVariable int postId, ModelMap model) {
 		 
 	        BlogPost post = blogService.getPostById(postId).orElse(null);

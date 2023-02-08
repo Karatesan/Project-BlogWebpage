@@ -12,18 +12,14 @@
 <body>
 <jsp:include page="header.jsp" /><br>
 	
-	<div class="author-photo-box2">
-			<img class="author2" src="pictures/Gamer2.png">
-		</div>
 <div class="in-center">
 	<h3>Add new post</h3>
 	
 		
 	<span style="color: red">${errorMessage}</span>
 	<br>
-	<form action="#" th:action="@{'/posts/new'}" method="post">
-		<input type="hidden" th:field="*{author}" /><br>
-		<input type="hidden" th:field="*{postedAt}" /><br>
+	<form action="/posts/new" method="post">
+		<input type="hidden" name="authorUsername" value="${ newPost.author }" /><br>
 		<label>Title</label>
 		<input class="form-field" type="text" name="title" placeholder="Title"/><br>
 		<label>Body of the post</label>
