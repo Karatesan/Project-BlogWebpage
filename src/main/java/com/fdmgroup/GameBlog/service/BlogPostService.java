@@ -31,5 +31,17 @@ public class BlogPostService implements IBlogPostService {
 		return blogPostRepository.findAll();
 	}
 	
+
+    public BlogPost save(BlogPost blogPost) {
+        if (blogPost.getBlogPostId() == null) {
+        	blogPost.setPostedAt(LocalDateTime.now());
+        }
+        blogPost.setUpdatedAt(LocalDateTime.now());
+        return blogPostRepository.save(blogPost);
+    }
+
+    public void delete(BlogPost blogPost) {
+    	blogPostRepository.delete(blogPost);
+    }
 	
 }

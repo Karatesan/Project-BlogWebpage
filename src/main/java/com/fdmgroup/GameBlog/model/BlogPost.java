@@ -25,6 +25,7 @@ public class BlogPost {
 	private String content;
 	private int likes;
 	private LocalDateTime postedAt;
+	private LocalDateTime updatedAt;
 	@OneToMany 
 	private List<Comment>comments;
 	//image
@@ -80,6 +81,12 @@ public class BlogPost {
 	}
 	public void setPostedAt(LocalDateTime postedAt) {
 		this.postedAt = postedAt;
+	}
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	@Override
