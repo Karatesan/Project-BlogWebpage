@@ -12,7 +12,8 @@ import javax.persistence.ManyToOne;
 public class Comment {
 	@Id
 	@GeneratedValue
-	private int commentId;
+	private Integer commentId;
+	private Integer parentCommentId;
 	@ManyToOne
 	private BlogPost blogPost;
 //	@OneToMany
@@ -34,11 +35,11 @@ public class Comment {
 		this.commenter = commenter;
 		this.date = date;
 	}
-
+	
 	public int getCommentId() {
 		return commentId;
 	}
-	public void setCommentId(int commentId) {
+	public void setCommentId(Integer commentId) {
 		this.commentId = commentId;
 	}
 	public BlogPost getArticleId() {

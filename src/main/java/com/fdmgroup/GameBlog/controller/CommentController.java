@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +44,7 @@ public class CommentController {
 	public String addComment(ModelMap model, @RequestParam String username, @RequestParam int articleId, @RequestParam String content) {
 		
 		User commenter = userService.findByUsername(username);
-		LocalDateTime date = LocalDateTime.of(LocalDate.now(), LocalTime.now());
+		LocalDateTime date = LocalDateTime.now();
 		Optional<BlogPost> article = blogService.getPostById(articleId);
 		
 		Comment comment = new Comment(article.get(), content, commenter, date);
@@ -56,13 +57,13 @@ public class CommentController {
 	}
 	
 	@PostMapping("/removeComment")
-	public String removeComment(ModelMap model, @RequestParam int commentId) {
+	public String removeComment(ModelMap model, @RequestParam Integer commentId) {
 		
 		
 		
 		return null;
 	}
-	
+		
 	 @PostMapping("/showAllComments")
 	    public String showComments(@PathVariable int postId, ModelMap model) {
 		 
