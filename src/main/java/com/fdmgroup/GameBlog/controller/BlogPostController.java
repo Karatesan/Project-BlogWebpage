@@ -25,20 +25,6 @@ public class BlogPostController {
 	@Autowired
 	DefaultUserDetailService defaultUserDetailService;
 	
-	@GetMapping("/posts/{id}")
-	public String getPost(@PathVariable Integer id, Model model) {
-		Optional<BlogPost> optionalBlogPost = blogPostService.getPostById(id); //find post by id
-		// if post exists, push it into model
-		if (optionalBlogPost.isPresent()) {
-			BlogPost blogPost = optionalBlogPost.get();
-			model.addAttribute("blogPost", blogPost);
-			return "post";
-		}
-		else {
-			return "404";
-		}
-	}
-	
 	@GetMapping("/posts/new")
 	public String createNewPost(Model model) {
 		Optional<User> optionalUser = defaultUserDetailService.findByEmail("to fill later");
@@ -58,4 +44,19 @@ public class BlogPostController {
 		blogPostService.savePost(blogPost);
 		return "redirect:/posts/"+blogPost.getBlogPostId();
 	}
+	
+	@GetMapping("/posts/{id}")
+	public String getPost(@PathVariable Integer id, Model model) {
+		Optional<BlogPost> optionalBlogPost = blogPostService.getPostById(id); //find post by id
+		// if post exists, push it into model
+		if (optionalBlogPost.isPresent()) {
+			BlogPost blogPost = optionalBlogPost.get();
+			model.addAttribute("blogPost", blogPost);
+			return "post";
+		}
+		else {
+			return "404";
+		}
+	}
+	
 }
