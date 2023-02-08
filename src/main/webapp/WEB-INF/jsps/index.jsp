@@ -21,10 +21,6 @@
 		<br></br>
 		<hr>
 
-
-
-
-
 		<!---Main images and title------------------------------------------------------------------>
 		<div class="main-photo-box"></div>
 		<div class="author-photo-box">
