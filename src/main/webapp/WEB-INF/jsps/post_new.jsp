@@ -20,9 +20,10 @@
 	<br>
 	<form action="/posts/new" method="post">
 		<input type="hidden" name="authorUsername" value="${ newPost.author }" /><br>
-		<label>Title</label>
+		<input type="hidden" name="authorUsername" value="${ newPost.author }" /><br>
+		<label class="name-box">Title</label><br>
 		<input class="form-field" type="text" name="title" placeholder="Title"/><br>
-		<label>Body of the post</label>
+		<label class="name-box">Body of the post</label><br>
 		<input class="form-field" type="text" name="content" placeholder="Content"/><br>
 		<br> 
 		<input class="form-field submit-button2" type="submit" value="Add post">

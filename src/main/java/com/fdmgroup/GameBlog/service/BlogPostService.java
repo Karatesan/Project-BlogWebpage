@@ -1,8 +1,6 @@
 package com.fdmgroup.GameBlog.service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +18,7 @@ public class BlogPostService implements IBlogPostService {
 	
 	public BlogPost savePost (BlogPost blogPost) {
 		if(blogPost.getBlogPostId() == null) {
-			blogPost.setPostedAt(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
+			blogPost.setPostedAt(LocalDateTime.now());
 		}
 		return blogPostRepository.save(blogPost);
 	}

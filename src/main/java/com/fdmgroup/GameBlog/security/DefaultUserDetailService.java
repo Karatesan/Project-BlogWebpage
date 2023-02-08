@@ -33,11 +33,7 @@ public class DefaultUserDetailService implements UserDetailsService {
 		User user = optionalUser.orElse(new User("default username"));
 		return user;
 	}
-	
-	public Optional<User> findByEmail(String email){
-		return userRepository.findByEmail(email);
-	}
-	
+		
 	public void saveUser(User user) {
 		userRepository.save(user);
 	}

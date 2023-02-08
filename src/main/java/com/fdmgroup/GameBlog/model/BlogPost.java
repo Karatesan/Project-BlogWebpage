@@ -3,6 +3,7 @@ package com.fdmgroup.GameBlog.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ public class BlogPost {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer blogPostId;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private User author;
 	private String title;
 	@Column(columnDefinition = "TEXT")
@@ -79,6 +80,12 @@ public class BlogPost {
 	}
 	public void setPostedAt(LocalDateTime postedAt) {
 		this.postedAt = postedAt;
+	}
+
+	@Override
+	public String toString() {
+		return "BlogPost [blogPostId=" + blogPostId + ", author=" + author + ", title=" + title + ", content=" + content
+				+ ", likes=" + likes + ", postedAt=" + postedAt + ", comments=" + comments + "]";
 	}
 	
 }

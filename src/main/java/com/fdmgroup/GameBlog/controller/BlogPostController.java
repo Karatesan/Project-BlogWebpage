@@ -3,6 +3,7 @@ package com.fdmgroup.GameBlog.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -34,26 +35,34 @@ public class BlogPostController {
 	
 	@GetMapping("/posts/new")
 	public String createNewPost(ModelMap model) {
-//		Optional<User> optionalUser = defaultUserDetailService.findByEmail("to fill later");
+		mainController.populateLoggedUserModel(model);
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		User user = defaultUserDetailService.findByUsername(username);
+		System.out.println(user.getUsername()+"===================/n=================");
+		BlogPost newBlogPost = new BlogPost();
+		newBlogPost.setAuthor(user);
+		System.out.println(newBlogPost.getAuthor()+"WWWWWWWWWWWWWWWW /n WWWWWWWWWWWWWWWWWWW");
+		model.addAttribute("blogPost", newBlogPost);
+		return "post_new";
+	}		
+//		Optional<User> optionalUser = defaultUserDetailService.findByEmail("email authorized to create by security));
 //		if (optionalUser.isPresent()) {
 //			BlogPost newBlogPost = new BlogPost();
 //			newBlogPost.setAuthor(optionalUser.get());
 //			model.addAttribute("newPost", newBlogPost);
-//			return "404";
+//			return "post_new";
 //		}
 //		else {
-			mainController.populateLoggedUserModel(model);
-			return "post_new";
-			
-		//}
-	}
+//			return "404";
+//		}
+
 
 	@PostMapping("/posts/new")
 	public String saveNewPost (@ModelAttribute BlogPost blogPost) {
-		
 		//tutaj lepiej zamias model atrtribute uzyj @request param dla ukrytych wartosci  itych wpisanych 
 		//w formie czyli authorUsername, title i content. Zmienilem w blog post i service na localDateTime - zawiera tez godziny
 		blogPostService.savePost(blogPost);
+		System.out.println(blogPost+"XXXXXXXXXXXXXXX /n XXXXXXXXXXXXXXXXXXXXX");
 		return "redirect:/posts/"+blogPost.getBlogPostId();
 	}
 	
