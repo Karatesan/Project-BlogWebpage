@@ -18,7 +18,7 @@ public class MainPageController {
 	public String home(Model model) {
 		List<BlogPost> listOfPosts = blogPostService.getAllPosts();
 		model.addAttribute("listOfPosts", listOfPosts);
-		return "home"; //variable "home" defining to our template home.jsp/html which is main page
+		return "index"; //variable "home" defining to our template home.jsp/html which is main page
 	}
 	
 }
