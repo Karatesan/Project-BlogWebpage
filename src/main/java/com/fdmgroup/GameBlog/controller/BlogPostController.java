@@ -40,7 +40,7 @@ public class BlogPostController {
 	public String saveNewPost (ModelMap model, @RequestParam String title, @RequestParam String content, @RequestParam String authorUsername) {
 		User author = defaultUserDetailService.findByUsername(authorUsername);
 		LocalDateTime time = LocalDateTime.now();
-		BlogPost newPost = new BlogPost(author, title, content, 0, time);
+		BlogPost newPost = new BlogPost(author, title, content, 0, 0, time);
 		blogPostService.savePost(newPost);
 		mainController.populateLoggedUserModel(model);
 		return "index";
@@ -61,7 +61,7 @@ public class BlogPostController {
 	}
 	
     @GetMapping("/posts/{id}/edit")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_AUTHOR')")
     public String getPostForEdit(@PathVariable Integer id, Model model) {
 
         // find post by id

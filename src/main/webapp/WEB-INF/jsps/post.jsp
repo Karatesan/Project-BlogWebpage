@@ -16,7 +16,8 @@
 	
 	<h2 class="big-title-font">${ blogPost.title }</h2>
 	<div class="blog-post-data">Author: ${blogPost.author.username }  Posted: ${blogPost.postedAt }</div>
-
+	<div class="blog-post-data">Author: ${blogPost.author.username }  Edited: ${blogPost.updatedAt }</div>
+	
 	<div class="main-blog-container">
 		<div class="blog-picture-container"> Picture here</div>
 
