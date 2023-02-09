@@ -1,29 +1,22 @@
 package com.fdmgroup.GameBlog.controller;
 
-import java.time.LocalDate;
-
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-import java.util.Optional;
 import com.fdmgroup.GameBlog.model.BlogPost;
 import com.fdmgroup.GameBlog.model.Comment;
 import com.fdmgroup.GameBlog.model.User;
+import com.fdmgroup.GameBlog.security.DefaultUserDetailService;
 import com.fdmgroup.GameBlog.service.BlogPostService;
 import com.fdmgroup.GameBlog.service.CommentService;
-import com.fdmgroup.GameBlog.controller.MainController;
-import com.fdmgroup.GameBlog.security.DefaultUserDetailService;
 
 @Controller
 public class CommentController {
