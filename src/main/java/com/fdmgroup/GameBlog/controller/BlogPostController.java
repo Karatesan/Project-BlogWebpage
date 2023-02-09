@@ -77,7 +77,7 @@ public class BlogPostController {
     }
 
     @GetMapping("/posts/{id}/delete")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_AUTHOR')")
     public String deletePost(@PathVariable Integer id) {
         // find post by id
         Optional<BlogPost> optionalBlogPost = blogPostService.getPostById(id);
