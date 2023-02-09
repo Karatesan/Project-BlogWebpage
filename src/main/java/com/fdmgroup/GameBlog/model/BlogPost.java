@@ -26,7 +26,7 @@ public class BlogPost {
 	private int likes;
 	private LocalDateTime postedAt;
 	private LocalDateTime updatedAt;
-	@OneToMany 
+	@OneToMany (cascade = CascadeType.PERSIST)
 	private List<Comment>comments;
 	//image
 	
@@ -41,6 +41,11 @@ public class BlogPost {
 		this.content = content;
 		this.likes = likes;
 		this.postedAt = postedAt;
+	}
+	
+	public void addComment(Comment comment) {
+		
+		comments.add(comment);
 	}
 	
 	
@@ -87,6 +92,16 @@ public class BlogPost {
 	}
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	
+	
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	@Override

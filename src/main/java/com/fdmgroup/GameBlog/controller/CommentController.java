@@ -41,12 +41,13 @@ public class CommentController {
 		Optional<BlogPost> article = blogService.getPostById(articleId);
 		
 		Comment comment = new Comment(article.get(), content, commenter, date);
-		
+		article.get().addComment(comment);
 		service.save(comment);
 		
 		mainController.populateLoggedUserModel(model);
-		
-		return null;
+		model.addAttribute("blogPost", article.get());
+		model.addAttribute("confirmation", "Your commend has been added!!");
+		return "post";
 	}
 	
 	@PostMapping("/removeComment")

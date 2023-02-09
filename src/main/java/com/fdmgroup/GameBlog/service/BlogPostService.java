@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fdmgroup.GameBlog.model.BlogPost;
+import com.fdmgroup.GameBlog.model.Comment;
 import com.fdmgroup.GameBlog.repository.BlogPostRepository;
 
 @Service
@@ -42,6 +43,12 @@ public class BlogPostService implements IBlogPostService {
 
     public void delete(BlogPost blogPost) {
     	blogPostRepository.delete(blogPost);
+    }
+    
+    public void addComment(Comment comment)
+    {
+    	
+    	
     }
 	
 }

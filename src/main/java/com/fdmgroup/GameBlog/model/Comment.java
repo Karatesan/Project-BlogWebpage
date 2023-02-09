@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 public class Comment {
 	@Id
 	@GeneratedValue
-	private Integer commentId;
+	private int commentId;
 	private Integer parentCommentId;
 	@ManyToOne
 	private BlogPost blogPost;

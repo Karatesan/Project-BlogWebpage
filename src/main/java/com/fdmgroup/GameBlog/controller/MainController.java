@@ -10,14 +10,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fdmgroup.GameBlog.model.BlogPost;
 import com.fdmgroup.GameBlog.model.User;
 import com.fdmgroup.GameBlog.security.DefaultUserDetailService;
+import com.fdmgroup.GameBlog.service.BlogPostService;
 
 @Controller
 public class MainController {
 	
 	@Autowired
 	private DefaultUserDetailService defaultUserService;
+	@Autowired
+	private BlogPostService blogService;
 
 	
 	public void populateLoggedUserModel(ModelMap model) {
@@ -39,7 +43,8 @@ public class MainController {
 	public String getIndex(ModelMap model) {
 
 		populateLoggedUserModel(model);
-		
+		List<BlogPost>allPosts =  blogService.getAllPosts();
+		model.addAttribute("allPosts", allPosts);
 		return "index";
 	}
 //	

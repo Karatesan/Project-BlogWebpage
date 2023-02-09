@@ -32,82 +32,25 @@
 
 		<div class="main-container">
 			<div class="blog-container">
+			<c:forEach items="${allPosts}" var="blogPost">
+			<a href="/posts/${blogPost.blogPostId }">
 				<div class="blog-entry b1">
 					<div class="blog-image"></div>
 					<div class="blog-text-box">
 						<div class="title">
-							<a>
-								<h1 class="big-title-font">God of War Ragnarok Review</h1>
-							</a>
-							<h2 class="subtitle subtitle-font">A captivating epic filled
-								with heart</h2>
+							
+								<h1 class="big-title-font">${blogPost.title}</h1>
+							
+							<h2 class="subtitle subtitle-font">${blogPost.title}</h2>
 						</div>
 						<div class="contents">
-							<p>The most powerful weapon God of War Ragnarok wields isn’t
-								the Leviathan Axe, which Kratos uses to cleave through enemies
-								of all sorts in bloody combat. And it isn’t the awe-inspiring
-								set pieces, of which there are many, that feature towering
-								beasts and vast landscapes that make you quiver at the very
-								sight. All those things are remarkable, but what will really
-								take hold of you in Ragnarok are the excellent characters. The
-								strong writing. And the nuanced drama and relationships between
-								mythical people that somehow feels real, believable, and earned.
-							</p>
+							<p>${blogPost.content}</p>
 						</div>
-
 					</div>
 				</div>
-				<div class="blog-entry b2">
-					<div class="blog-image"></div>
-					<div class="blog-text-box">
-						<div class="title">
-							<a>
-								<h1 class="big-title-font">World of Warcraft Review</h1>
-							</a>
-							<h2 class="subtitle subtitle-font">Blizzard does it again</h2>
-						</div>
-						<div class="contents">
-							<p>MMOs are a strange beast. They are designed to make you
-								play as much as possible, yet addictiveness does not always
-								equal fun. In the field of pyschology, there are several kinds
-								of rewards systems, and the one that seems to be the most
-								successful is the random reward introduced at a random time.
-								Sometimes you click the button, and nothing happens. Sometimes
-								you click and get the food pellet. It's this mechanism that
-								fuels the slots in Vegas, and when you walk away empty, as is
-								statistically inevitable over a long enough stretch of time, you
-								tell yourself that the overall value was the experience itself,
-								since you come away with nothing tangible. MMOs take away your
-								time and they never deliver a discreet conclusion.</p>
-						</div>
-
-					</div>
-				</div>
-				<div class="blog-entry b3">
-					<div class="blog-image"></div>
-					<div class="blog-text-box">
-						<div class="title">
-							<a>
-								<h1 class="big-title-font">Witcher 3 Review</h1>
-							</a>
-							<h2 class="subtitle subtitle-font">The dark places of the
-								land are full of the habitations of violence.</h2>
-						</div>
-						<div class="contents">
-							<p>Unlike its predecessor, The Witcher 3: Wild Hunt doesn't
-								exactly come screaming off the starting line. Compared to The
-								Witcher 2, where you're immediately plunged headlong into a sexy
-								story of intrigue and betrayal, this main quest can seem
-								mundane, even perfunctory at times. But each time I stepped off
-								the well-beaten path to blaze my own trail, it turned into a
-								wild, open, exhilarating fantasy roleplaying experience, rife
-								with opportunities to make use of its excellent combat. Even
-								after over 100 hours with The Witcher 3, it still tempts me to
-								press on – there’s so much more I want to learn, and hunt.</p>
-						</div>
-
-					</div>
-				</div>
+				</a>
+	</c:forEach>
+	
 
 				<div class="load-older">
 					<a class="money-link">Show Previous</a>
