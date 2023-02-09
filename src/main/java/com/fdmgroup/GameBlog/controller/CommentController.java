@@ -1,28 +1,22 @@
 package com.fdmgroup.GameBlog.controller;
 
-import java.time.LocalDate;
-
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-import java.util.Optional;
 import com.fdmgroup.GameBlog.model.BlogPost;
 import com.fdmgroup.GameBlog.model.Comment;
 import com.fdmgroup.GameBlog.model.User;
+import com.fdmgroup.GameBlog.security.DefaultUserDetailService;
 import com.fdmgroup.GameBlog.service.BlogPostService;
 import com.fdmgroup.GameBlog.service.CommentService;
-import com.fdmgroup.GameBlog.controller.MainController;
-import com.fdmgroup.GameBlog.security.DefaultUserDetailService;
 
 @Controller
 public class CommentController {
@@ -43,7 +37,7 @@ public class CommentController {
 	public String addComment(ModelMap model, @RequestParam String username, @RequestParam int articleId, @RequestParam String content) {
 		
 		User commenter = userService.findByUsername(username);
-		LocalDateTime date = LocalDateTime.of(LocalDate.now(), LocalTime.now());
+		LocalDateTime date = LocalDateTime.now();
 		Optional<BlogPost> article = blogService.getPostById(articleId);
 		
 		Comment comment = new Comment(article.get(), content, commenter, date);
@@ -56,13 +50,13 @@ public class CommentController {
 	}
 	
 	@PostMapping("/removeComment")
-	public String removeComment(ModelMap model, @RequestParam int commentId) {
+	public String removeComment(ModelMap model, @RequestParam Integer commentId) {
 		
 		
 		
 		return null;
 	}
-	
+		
 	 @PostMapping("/showAllComments")
 	    public String showComments(@PathVariable int postId, ModelMap model) {
 		 

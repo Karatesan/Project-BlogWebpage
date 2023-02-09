@@ -3,9 +3,11 @@ package com.fdmgroup.GameBlog.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.fdmgroup.GameBlog.model.BlogPost;
+import com.fdmgroup.GameBlog.model.ChildComment;
+
 
 @Repository
-public interface BlogPostRepository extends JpaRepository<BlogPost, Integer> {
+public interface ChildCommentRepository extends JpaRepository<ChildComment, Integer>{
+	
 
 }

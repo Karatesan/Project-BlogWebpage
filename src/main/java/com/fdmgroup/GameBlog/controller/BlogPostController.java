@@ -4,12 +4,11 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,9 +24,6 @@ public class BlogPostController {
 	@Autowired
 	private BlogPostService blogPostService;
 	
-//	@Autowired
-//	private User user;
-	
 	@Autowired
 	DefaultUserDetailService defaultUserDetailService;
 	
@@ -37,35 +33,13 @@ public class BlogPostController {
 	@GetMapping("/posts/new")
 	public String createNewPost(ModelMap model) {
 		mainController.populateLoggedUserModel(model);
-//		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-//		User user = defaultUserDetailService.findByUsername(username);
-//		System.out.println(user.getUsername()+"===================/n=================");
-//		BlogPost newBlogPost = new BlogPost();
-//		newBlogPost.setAuthor(user);
-//		System.out.println(newBlogPost.getAuthor()+"WWWWWWWWWWWWWWWW /n WWWWWWWWWWWWWWWWWWW");
-//		model.addAttribute("blogPost", newBlogPost);
 		return "post_new";
 	}		
-//		Optional<User> optionalUser = defaultUserDetailService.findByEmail("email authorized to create by security));
-//		if (optionalUser.isPresent()) {
-//			BlogPost newBlogPost = new BlogPost();
-//			newBlogPost.setAuthor(optionalUser.get());
-//			model.addAttribute("newPost", newBlogPost);
-//			return "post_new";
-//		}
-//		else {
-//			return "404";
-//		}
-
 
 	@PostMapping("/posts/new")
 	public String saveNewPost (ModelMap model, @RequestParam String title, @RequestParam String content, @RequestParam String authorUsername) {
-		//tutaj lepiej zamias model atrtribute uzyj @request param dla ukrytych wartosci  itych wpisanych 
-		//w formie czyli authorUsername, title i content. Zmienilem w blog post i service na localDateTime - zawiera tez godziny
-		
 		User author = defaultUserDetailService.findByUsername(authorUsername);
 		LocalDateTime time = LocalDateTime.now();
-		
 		BlogPost newPost = new BlogPost(author, title, content, 0, time);
 		blogPostService.savePost(newPost);
 		mainController.populateLoggedUserModel(model);
@@ -86,4 +60,33 @@ public class BlogPostController {
 		}
 	}
 	
+    @GetMapping("/posts/{id}/edit")
+    @PreAuthorize("isAuthenticated()")
+    public String getPostForEdit(@PathVariable Integer id, Model model) {
+
+        // find post by id
+        Optional<BlogPost> optionalBlogPost = blogPostService.getPostById(id);
+        // if post exist put it in model
+        if (optionalBlogPost.isPresent()) {
+           BlogPost blogPost = optionalBlogPost.get();
+            model.addAttribute("blogPost", blogPost);
+            return "post_edit";
+        } else {
+            return "404";
+        }
+    }
+
+    @GetMapping("/posts/{id}/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_AUTHOR')")
+    public String deletePost(@PathVariable Integer id) {
+        // find post by id
+        Optional<BlogPost> optionalBlogPost = blogPostService.getPostById(id);
+        if (optionalBlogPost.isPresent()) {
+            BlogPost blogPost = optionalBlogPost.get();
+            blogPostService.delete(blogPost);
+            return "redirect:/";
+        } else {
+            return "404";
+        }
+    }
 }
