@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.fdmgroup.GameBlog.model.BlogPost;
 import com.fdmgroup.GameBlog.model.Comment;
+import com.fdmgroup.GameBlog.model.User;
 import com.fdmgroup.GameBlog.repository.CommentRepository;
 
 @Service
@@ -27,5 +28,9 @@ public class CommentService {
 	public List<Comment> findAllCommentsFromPost(BlogPost post){
 		
 		return commentRepo.findByblogPostOrderByDateAsc(post);		
+	}
+	
+	public List<Comment>findAllCommentsFromUser(User user){
+		return commentRepo.findByCommenter(user);
 	}
 }

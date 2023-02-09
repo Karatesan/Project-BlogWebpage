@@ -18,6 +18,12 @@
 	align-items: center;
 }
 
+.div1{
+border:3px white solid;
+width:40%;	
+}
+
+
 .no-decoration {
 	text-decoration: none;
 	color: #000;

@@ -28,17 +28,18 @@ public class DataImport implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		if(!userRepository.findByUsername("admin").isPresent()) {
 			Role roleAdmin = new Role("Admin");
-			Role roleCustomer = new Role("Customer");
+			Role roleReader = new Role("Reader");
+			Role roleAuthor = new Role("Author");
 		
 			
-			User admin = new User("admin", passwordEncoder.encode("123"), "admin@shazar.com", "defaultCity",  roleAdmin);
+			User admin = new User("admin", passwordEncoder.encode("123"), "admin@blog.com", "defaultCity",  roleAdmin);
 			userRepository.save(admin);
 		
-			User customer = new User("customer", passwordEncoder.encode("321"), "user@abc.com", "defaultCity",  roleCustomer);
+			User customer = new User("reader", passwordEncoder.encode("321"), "user@abc.com", "defaultCity",  roleReader);
 			userRepository.save(customer);
+			
+			User author = new User("author", passwordEncoder.encode("321"), "user@abc.com", "defaultCity",  roleAuthor);
+			userRepository.save(author);
 		}
-		
 	}
-	
-	
 }

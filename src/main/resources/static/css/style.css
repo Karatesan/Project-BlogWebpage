@@ -352,10 +352,77 @@ body {
     background-image: url(../images/firstwitcher011280jpg-7667b2_160w.jpg);
 }
 
-/*----------------------------------------------------------------*/
+/*- List of users---------------------------------------------------------------*/
 
+.user-card{
+	border: 3px rgb(0, 0, 0) solid;
+	width:30%;
+	margin:-10px auto 0px auto;
+	border-radius: 15px;
+	background-color: #2e4d2e;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 4px 4px 15px rgb(0, 0, 0);
+}
 
+.user-header{
+	
+	margin:10px auto;
+}
 
+.user-menu{
+	display: flex;
+	justify-content: center;
+}
+
+a{
+	text-decoration:none;
+}
+
+.user-card:hover {
+    background-color: #4d6945;
+    color: black;
+}
+
+.username{
+	margin:30px auto 20px auto;
+	text-align:center;
+	color: rgb(185, 207, 188);
+	font-size:30px;
+	
+}
+
+.users {
+	background-color: #2e4d2e;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	display: flex;
+	margin:0 auto;
+	width:500px;
+	box-shadow: 5px 5px 15px rgb(0, 0, 0);
+	justify-content: space-between;
+}
+
+.div1{
+color: rgb(185, 207, 188);
+margin-top:30px;
+}
+
+.div1 .button
+{
+	border:2px black solid;
+	box-shadow: 4px 4px 15px rgb(0, 0, 0);
+	border-radius: 10px;
+	color: white;
+	
+}
+
+.div1 .button:hover {
+    background-color: #4d6945;
+    color: black;
+}
 
 /* nav {some rules}
 

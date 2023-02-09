@@ -33,9 +33,17 @@ public class DefaultUserDetailService implements UserDetailsService {
 		User user = optionalUser.orElse(new User("default username"));
 		return user;
 	}
+	
+	public User findById(int id) {
+		return findById(id);
+	}
 		
 	public void saveUser(User user) {
 		userRepository.save(user);
+	}
+	
+	public void removeUser(User user) {
+		userRepository.delete(user);
 	}
 	
 	public List<User> listAllUsers() {

@@ -27,6 +27,7 @@
 						<a class="italic"> ${user.username}</a>
 						<a href="/logout"><spring:message code="label.logout"/></a>
 						<a href="/posts/new">Add New Post</a>
+						<a href="/admin/listUsers">Show all users</a>
 						<!-------------- SEE PROFILE------------------------- -->
 						<a href="/showProfile"><svg xmlns="http://www.w3.org/2000/svg"
 								width="25" height="25" fill="currentColor"
