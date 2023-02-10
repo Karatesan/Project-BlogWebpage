@@ -21,7 +21,7 @@
 			<div class="div1">
 			<a class="button" href="/admin/confirmAccountDeletion/${viewUser.username}">Delete Profile</a> <br> <br> <br> 
 			<!--  <a class="button" href="/goChangePasswordPage">Block Profile</a> <br><br> <br> -->
-			<a class="button" href="/goShowBookingsOfUser/${user.username}">Show all comments of user</a><br><br><br>  
+			<a class="button" href="/admin/showComments/${viewUser.username}">Show all comments of user</a><br><br><br>  
 			
 			<form action="/admin/changeAccStatus" method="post">
 				<input type="hidden" name="username" value="${viewUser.username}">

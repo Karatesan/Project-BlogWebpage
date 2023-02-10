@@ -1,6 +1,7 @@
 package com.fdmgroup.GameBlog.controller;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,9 @@ public class CommentController {
 	public String addComment(ModelMap model, @RequestParam String username, @RequestParam int articleId, @RequestParam String content) {
 		
 		User commenter = userService.findByUsername(username);
+
 		LocalDateTime date = LocalDateTime.now();
+		
 		Optional<BlogPost> article = blogService.getPostById(articleId);
 		
 		Comment comment = new Comment(article.get(), content, commenter, date);
@@ -53,9 +56,14 @@ public class CommentController {
 	@PostMapping("/removeComment")
 	public String removeComment(ModelMap model, @RequestParam Integer commentId) {
 		
+		System.out.println(commentId+"=================\n============\n=================\n=============");
+		//Comment toDelete = service.findById(commentId);
+		//System.out.println(toDelete+"=================\n============\n=================\n=============");
+		//model.addAttribute("comments", service.findAllCommentsFromUser(toDelete.getCommenter()));
+		//service.deleteComment(toDelete);
 		
-		
-		return null;
+		mainController.populateLoggedUserModel(model);
+		return "index";
 	}
 		
 	 @PostMapping("/showAllComments")

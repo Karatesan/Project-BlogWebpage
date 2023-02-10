@@ -43,6 +43,7 @@ public class AdminController {
 		
 		List<User> allUsers = userService.listAllUsers();
 		model.addAttribute("Users", allUsers);
+		mainController.populateLoggedUserModel(model);
 		return "usersList";
 	}
 	
@@ -97,12 +98,13 @@ public class AdminController {
 	
 	
 	@GetMapping("/admin/showComments/{username}")
-	public String gotToShowUserComments(ModelMap model, String username) {
+	public String gotToShowUserComments(ModelMap model, @PathVariable String username) {
 		
 		User user = userService.findByUsername(username);
 		List<Comment> comments = commentService.findAllCommentsFromUser(user);
 		
 		model.addAttribute("comments", comments);
+		model.addAttribute("username", username);
 		mainController.populateLoggedUserModel(model);
 		return "commentsOfUser";
 	}

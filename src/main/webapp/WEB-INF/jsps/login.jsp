@@ -10,16 +10,17 @@
 <link href="${jstlCss}" rel="stylesheet">
 </head>
 <body>
+
 <jsp:include page="header.jsp" /><br>
 
 	<div class="author-photo-box2">
 			<img class="author2" src="pictures/Gamer2.png">
 		</div>
-<div class="in-center">
+
 	<h3>Login</h3>
 	
 		
-
+<div class="form-container">
 		<form action="/login" method="post">
 			<div>
 				<input class="form-field" type="text" name="username" placeholder="Username" /><br>
@@ -32,7 +33,7 @@
 				<a class="link" href="/goRegisterPage">	Register</a> <br>
 			</div>
 		</form>
-		
+		</div>
 	<jsp:include page="footer.jsp" />
 
 </body>

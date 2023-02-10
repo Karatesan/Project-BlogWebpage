@@ -21,6 +21,7 @@
 		
 	<span style="color: red">${errorMessage}</span>
 	<br>
+	<div class="form-container">
 	<form action="/register" method="post">
 		<input class="form-field" type="text" name="username" placeholder="Username" required /><br>
 		<input class="form-field" type="password" name="password" placeholder="Password" required /><br>
@@ -31,6 +32,7 @@
 		<input class="form-field" type="text" name="answerQuestion" placeholder="FavouriteCity" required /><br> 
 		<input class="form-field submit-button2" type="submit" value="Register">
 	</form>
+	</div>
 	<br>
 	<br>
 </div>

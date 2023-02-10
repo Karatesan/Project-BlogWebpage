@@ -24,7 +24,6 @@ public class BlogPost {
 	@Column(columnDefinition = "TEXT")
 	private String content;
 	private int likes;
-	private int dislikes;
 	private LocalDateTime postedAt;
 	private LocalDateTime updatedAt;
 	@OneToMany (cascade = CascadeType.PERSIST)
@@ -35,17 +34,17 @@ public class BlogPost {
 		
 	}
 	
-	public BlogPost(User author, String title, String content, int likes, int dislikes, LocalDateTime postedAt) {
+	public BlogPost(User author, String title, String content, int likes, LocalDateTime postedAt) {
 		super();
 		this.author = author;
 		this.title = title;
 		this.content = content;
 		this.likes = likes;
-		this.dislikes = dislikes;
 		this.postedAt = postedAt;
 	}
 	
 	public void addComment(Comment comment) {
+		
 		comments.add(comment);
 	}
 	
@@ -82,12 +81,6 @@ public class BlogPost {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-	public int getDislikes() {
-		return dislikes;
-	}
-	public void setDislikes(int dislikes) {
-		this.dislikes = dislikes;
-	}
 	public LocalDateTime getPostedAt() {
 		return postedAt;
 	}
@@ -113,9 +106,8 @@ public class BlogPost {
 
 	@Override
 	public String toString() {
-		return "BlogPost [author=" + author + ", title=" + title + ", content=" + content + ", likes=" + likes
-				+ ", dislikes=" + dislikes + ", postedAt=" + postedAt + ", updatedAt=" + updatedAt + ", comments="
-				+ comments + "]";
+		return "BlogPost [blogPostId=" + blogPostId + ", author=" + author + ", title=" + title + ", content=" + content
+				+ ", likes=" + likes + ", postedAt=" + postedAt + ", comments=" + comments + "]";
 	}
 	
 }

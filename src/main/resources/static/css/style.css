@@ -31,6 +31,7 @@ body {
 	height: 25px;
 	padding: 10px;
 	margin: auto 5px;
+	margin-top:18px;
 	width: 190px;
 	border-radius: 5px;
 	border: none;
@@ -412,17 +413,17 @@ a {
 
 .blog-content-container {
 	width: 80%;
-	border: 2px white solid;
+
 	
 	padding:30px;
 }
 
 .comments-container {
 	width: 80%;
-	border: 2px white solid;
 	display:flex;
 	flex-direction:column;
 	align-items:center;
+	margin:0 auto;
 }
 
 .blog-post-data{
@@ -436,22 +437,41 @@ a {
 	border-radius:5px;
 	box-shadow: 3px 3px 10px rgb(0, 0, 0);
 	margin:5px;
-	padding:5px;
+	padding:10px;
 	
 }
 
-/* nav {some rules}
+.username{
+	
+	margin:auto 0;
+	margin-left:10px;
+	border-radius:4px;
+	padding:5px 10px;
+	box-shadow: 2px 2px 5px rgb(0, 0, 0);
+}
 
-.dropdowncon{display:none;}
+.searching-page-container{
+	
+	display:flex;
+	justify-content:center;
+}
 
+.commenter{
+	
+	font-size:15px;
+	font-weight:700	;
+	margin-right:20px;
+		
+}
 
+.info-box{
 
-@media only screen and (max-width:600px) {
-
-nav {display:none;}
-
-.dropdowncon{display:inline;}
-
-
-
-in the wide view the whoe nav shows. In the narrow view only the displaydropdownicon */
+	}
+.date{
+	font-size:15px;
+	color:white;
+}
+	
+	
+	
+}

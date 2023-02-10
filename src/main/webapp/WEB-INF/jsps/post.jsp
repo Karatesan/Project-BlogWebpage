@@ -16,8 +16,7 @@
 	
 	<h2 class="big-title-font">${ blogPost.title }</h2>
 	<div class="blog-post-data">Author: ${blogPost.author.username }  Posted: ${blogPost.postedAt }</div>
-	<div class="blog-post-data">Author: ${blogPost.author.username }  Edited: ${blogPost.updatedAt }</div>
-	
+
 	<div class="main-blog-container">
 		<div class="blog-picture-container"> Picture here</div>
 
@@ -25,10 +24,10 @@
 		<div class=comments-container> 
 		<span style="color: red">${confirmation}</span><br>
 			<form action="/addComment" method="post">
-			<input type="hidden" name="username" value="${blogPost.author.username}">
-			<input type="hidden" name="articleId" value="${blogPost.blogPostId}">
-			<input class="comment-box" type="text" name="content" placeholder="Comment" required>
-			<input type="submit" value="Comment">
+				<input type="hidden" name="username" value="${user.username}">
+				<input type="hidden" name="articleId" value="${blogPost.blogPostId}">
+				<input class="comment-box" type="text" name="content" placeholder="Comment" required>
+				<input type="submit" value="Comment">
 			</form>
 			
 	<c:forEach items="${blogPost.comments}" var="comment">

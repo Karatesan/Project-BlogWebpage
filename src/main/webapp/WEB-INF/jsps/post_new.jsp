@@ -18,9 +18,9 @@
 		
 	<span style="color: red">${errorMessage}</span>
 	<br>
+	<div class="form-container">
 	<form action="/posts/new" method="post">
 		<input type="hidden" name="authorUsername" value="${ user.username }" /><br>
-		<input type="hidden" name="time" value="${ user.time }" /><br>
 		<label class="name-box">Title</label><br>
 		<input class="form-field" type="text" name="title" placeholder="Title"/><br>
 		<label class="name-box">Body of the post</label><br>
@@ -28,6 +28,7 @@
 		<br> 
 		<input class="form-field submit-button2" type="submit" value="Add post">
 	</form>
+	</div>
 	<br>
 	<br>
 </div>

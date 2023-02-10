@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.fdmgroup.GameBlog.model.BlogPost;
@@ -32,5 +33,20 @@ public class CommentService {
 	
 	public List<Comment>findAllCommentsFromUser(User user){
 		return commentRepo.findByCommenter(user);
+	}
+	
+	public void deleteById(Integer id) {
+		commentRepo.deleteById(id);
+	}
+	public Comment findById(Integer id) {
+		
+		Comment c = commentRepo.getById(id);
+		System.out.println(c+"=================\n============\n=================\n=============");
+		return commentRepo.getById(id);
+	}
+	
+	public void deleteComment(Comment c) {
+		commentRepo.delete(c);
+		
 	}
 }
