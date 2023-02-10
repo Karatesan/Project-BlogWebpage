@@ -20,15 +20,18 @@
 	<div class="main-blog-container">
 		<div class="blog-picture-container"> Picture here</div>
 		<div class="blog-content-container"> ${blogPost.content }</div>
-		Number of likes : ${blogPost.likes}
+		Number of likes : ${blogPost.likes} <br><br>
 		<form action="/likes/${blogPost.blogPostId}" method="post">
-				<input type="submit" value="Like">
+				<input type="submit" value="Like"><br><br>
 		</form>
-		
-		<form action="/posts/${blogPost.blogPostId}/edit">
-				<button>Edit post</button>
-		</form>
-		
+		<c:choose>
+			<c:when test="${user.role.roleName.equals('Admin') || user.role.roleName.equals('Author') }">
+            <form action="/posts/${blogPost.blogPostId}/edit">
+				<input type="submit" value="Edit post"><br><br>
+			</form>
+            </c:when>
+            </c:choose>
+				
 		<div class=comments-container> 
 		<span style="color: red">${confirmation}</span><br>
 			<form action="/addComment" method="post">
