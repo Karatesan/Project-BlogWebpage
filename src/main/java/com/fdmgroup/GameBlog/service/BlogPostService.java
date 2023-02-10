@@ -10,12 +10,16 @@ import org.springframework.stereotype.Service;
 import com.fdmgroup.GameBlog.model.BlogPost;
 import com.fdmgroup.GameBlog.model.Comment;
 import com.fdmgroup.GameBlog.repository.BlogPostRepository;
+import com.fdmgroup.GameBlog.repository.CommentRepository;
 
 @Service
 public class BlogPostService implements IBlogPostService {
 	
 	@Autowired
 	private BlogPostRepository blogPostRepository;
+	
+	@Autowired
+	private CommentRepository commentRepository;
 	
 	public BlogPost savePost (BlogPost blogPost) {
 		if(blogPost.getBlogPostId() == null) {
@@ -25,6 +29,7 @@ public class BlogPostService implements IBlogPostService {
 	}
 	
 	public Optional<BlogPost> getPostById(Integer id){
+
 		return blogPostRepository.findById(id);
 	}
 
@@ -45,9 +50,9 @@ public class BlogPostService implements IBlogPostService {
     	blogPostRepository.delete(blogPost);
     }
     
-    public void addComment(Comment comment)
+    public void deleteComment(Comment comment)
     {
-    	
+    	commentRepository.delete(comment);
     	
     }
 	

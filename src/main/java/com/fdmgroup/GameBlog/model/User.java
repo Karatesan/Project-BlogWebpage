@@ -42,6 +42,16 @@ public class User {
 		this.answerQuestion = answerQuestion;
 		this.role = role;
 	}
+	
+	
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
 	public String getUsername() {
 		return username;

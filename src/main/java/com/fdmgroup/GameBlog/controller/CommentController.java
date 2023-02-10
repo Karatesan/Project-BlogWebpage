@@ -56,14 +56,12 @@ public class CommentController {
 	@PostMapping("/removeComment")
 	public String removeComment(ModelMap model, @RequestParam Integer commentId) {
 		
-		System.out.println(commentId+"=================\n============\n=================\n=============");
-		//Comment toDelete = service.findById(commentId);
-		//System.out.println(toDelete+"=================\n============\n=================\n=============");
-		//model.addAttribute("comments", service.findAllCommentsFromUser(toDelete.getCommenter()));
-		//service.deleteComment(toDelete);
-		
+		Comment toDelete = service.findById(commentId);
+		User commenter = toDelete.getCommenter();
+		service.deleteComment(toDelete);		
+		model.addAttribute("comments", service.findAllCommentsFromUser(commenter));
 		mainController.populateLoggedUserModel(model);
-		return "index";
+		return "commentsOfUser";
 	}
 		
 	 @PostMapping("/showAllComments")

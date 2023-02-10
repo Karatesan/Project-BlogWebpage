@@ -18,6 +18,9 @@ public class CommentService {
 	@Autowired
 	private CommentRepository commentRepo;
 	
+	@Autowired
+	private BlogPostService blogService;
+	
 	public void save(Comment comment) {
 		commentRepo.save(comment);
 	}
@@ -41,12 +44,12 @@ public class CommentService {
 	public Comment findById(Integer id) {
 		
 		Comment c = commentRepo.getById(id);
-		System.out.println(c+"=================\n============\n=================\n=============");
+		
 		return commentRepo.getById(id);
 	}
 	
 	public void deleteComment(Comment c) {
+
 		commentRepo.delete(c);
-		
 	}
 }

@@ -26,7 +26,7 @@ public class BlogPost {
 	private int likes;
 	private LocalDateTime postedAt;
 	private LocalDateTime updatedAt;
-	@OneToMany (cascade = CascadeType.PERSIST)
+	@OneToMany ( mappedBy = "blogPost")
 	private List<Comment>comments;
 	//image
 	
@@ -46,6 +46,11 @@ public class BlogPost {
 	public void addComment(Comment comment) {
 		
 		comments.add(comment);
+	}
+	
+	public void removeComment(Comment comment) {
+		
+		comments.remove(comment);
 	}
 	
 	
