@@ -1,6 +1,7 @@
 package com.fdmgroup.GameBlog.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,17 +43,20 @@ public class BlogPostController {
 		LocalDateTime time = LocalDateTime.now();
 		BlogPost newPost = new BlogPost(author, title, content, 0, time);
 		blogPostService.savePost(newPost);
+		List<BlogPost>allPosts =  blogPostService.getAllPosts();
+		model.addAttribute("allPosts", allPosts);
 		mainController.populateLoggedUserModel(model);
 		return "index";
 	}
 	
 	@GetMapping("/posts/{id}")
-	public String getPost(@PathVariable Integer id, Model model) {
+	public String getPost(@PathVariable Integer id, ModelMap model) {
 		Optional<BlogPost> optionalBlogPost = blogPostService.getPostById(id); //find post by id
 		// if post exists, push it into model
 		if (optionalBlogPost.isPresent()) {
 			BlogPost blogPost = optionalBlogPost.get();
 			model.addAttribute("blogPost", blogPost);
+			mainController.populateLoggedUserModel(model);
 			return "post";
 		}
 		else {
@@ -62,7 +66,7 @@ public class BlogPostController {
 	
     @GetMapping("/posts/{id}/edit")
     @PreAuthorize("isAuthenticated()")
-    public String getPostForEdit(@PathVariable Integer id, Model model) {
+    public String getPostForEdit(@PathVariable Integer id, ModelMap model) {
 
         // find post by id
         Optional<BlogPost> optionalBlogPost = blogPostService.getPostById(id);
