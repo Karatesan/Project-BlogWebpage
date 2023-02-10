@@ -29,7 +29,6 @@ public class BlogPostService implements IBlogPostService {
 	}
 	
 	public Optional<BlogPost> getPostById(Integer id){
-
 		return blogPostRepository.findById(id);
 	}
 
