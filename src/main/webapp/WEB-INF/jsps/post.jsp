@@ -19,8 +19,12 @@
 
 	<div class="main-blog-container">
 		<div class="blog-picture-container"> Picture here</div>
-
+		Lajki dla chuow : ${blogPost.likes}
 		<div class="blog-content-container"> ${blogPost.content }</div>
+		<form action="/likes/${blogPost.blogPostId}" method="post">
+				<input type="submit" value="Like">
+		</form>
+		
 		<div class=comments-container> 
 		<span style="color: red">${confirmation}</span><br>
 			<form action="/addComment" method="post">
@@ -29,17 +33,18 @@
 				<input class="comment-box" type="text" name="content" placeholder="Comment" required>
 				<input type="submit" value="Comment">
 			</form>
-			
-	<c:forEach items="${blogPost.comments}" var="comment">
-	
-		<div class="comment-box">
-		Commenter: ${comment.commenter.username }    date: ${comment.date }<br>
-		Comment text: ${comment.content }
+
+			<c:forEach items="${blogPost.comments}" var="comment"> 
+			<div class="comment-box">
+					Commenter: ${comment.commenter.username } date: ${comment.date }<br>
+					<form action="/removeComment" method="post">
+						<input type="hidden" name="commentId" value="${comment.commentId}">
+						<input type="submit" name="delete" value="delete comment">
+					</form>
+					Comment text: ${comment.content }
+				</div> </c:forEach>
+
 		</div>
-	
-	</c:forEach>
-	
-	</div>
 	</div>
 
 	<jsp:include page="footer.jsp" />
