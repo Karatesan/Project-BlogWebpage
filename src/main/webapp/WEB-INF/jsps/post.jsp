@@ -19,10 +19,14 @@
 
 	<div class="main-blog-container">
 		<div class="blog-picture-container"> Picture here</div>
-		Lajki dla chuow : ${blogPost.likes}
 		<div class="blog-content-container"> ${blogPost.content }</div>
+		Number of likes : ${blogPost.likes}
 		<form action="/likes/${blogPost.blogPostId}" method="post">
 				<input type="submit" value="Like">
+		</form>
+		
+		<form action="/posts/${blogPost.blogPostId}/edit">
+				<button>Edit post</button>
 		</form>
 		
 		<div class=comments-container> 

@@ -16,8 +16,13 @@
 	<h2 class="big-title-font">Edit your post</h2>
 	<h2 class="big-title-font">${ blogPost.title }</h2>
 	<div class="blog-post-data">Author: ${blogPost.author.username }  Posted: ${blogPost.postedAt }</div>
-
-	
+	<div class="blog-content-container"> ${blogPost.content }</div>
+		<form action="/posts/${blogPost.blogPostId}/edit" method="get">
+				<input type="submit" value="Edit">
+		</form>
+		<form action="/posts/${blogPost.blogPostId}/delete" method="get">
+				<input type="submit" value="Delete">
+		</form>
 
 	<jsp:include page="footer.jsp" />
 </body>

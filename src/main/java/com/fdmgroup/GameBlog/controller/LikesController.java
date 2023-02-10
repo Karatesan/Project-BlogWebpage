@@ -22,18 +22,17 @@ public class LikesController {
 	
 	  
 	  @PostMapping("/likes/{blogPostId}")
-	  public String submitRating(ModelMap model, @PathVariable int blogPostId) {
-		  System.out.println("----------- / n---------------"); 
+	  public String addLike(ModelMap model, @PathVariable int blogPostId) {
+		 System.out.println("----------- / n---------------"); 
 		Optional<BlogPost> blogPost = blogPostService.getPostById(blogPostId);
 	    int currentLikes = blogPost.get().getLikes();
 	    int updatedLikes = currentLikes+1;
 	    blogPost.get().setLikes(updatedLikes);
-	    System.out.println("PostID: "+blogPost + "; No. of likes: "+updatedLikes+ "----------- / n---------------");
+	    System.out.println("PostID: "+blogPostId + "; No. of likes: "+updatedLikes+ "----------- / n---------------");
 	    blogPostService.save(blogPost.get());
 	    model.addAttribute("blogPost", blogPost.get());
 	    mainController.populateLoggedUserModel(model);
 	    return "post";
-	  }
-	  
+	  }   
 }
 

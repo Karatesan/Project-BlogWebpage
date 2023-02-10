@@ -65,9 +65,8 @@ public class BlogPostController {
 	}
 	
     @GetMapping("/posts/{id}/edit")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_AUTHOR')")
     public String getPostForEdit(@PathVariable Integer id, ModelMap model) {
-
         // find post by id
         Optional<BlogPost> optionalBlogPost = blogPostService.getPostById(id);
         // if post exist put it in model
