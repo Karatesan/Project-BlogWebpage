@@ -90,7 +90,7 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return "Comment [commentId=" + commentId + ", article=" + blogPost + ", content=" + content + ", commenter="
+		return "Comment [commentId=" + commentId  + ", content=" + content + ", commenter="
 				+ commenter + ", date=" + date + "]";
 	}
 	
