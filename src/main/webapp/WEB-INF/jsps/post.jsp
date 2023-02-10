@@ -34,6 +34,10 @@
 	
 		<div class="comment-box">
 		Commenter: ${comment.commenter.username }    date: ${comment.date }<br>
+		<form action="/removeComment" method="post">
+			<input type="hidden" name="commentId" value="${comment.commentId}">
+			<input type="submit" name="delete" value="delete comment">
+		</form>
 		Comment text: ${comment.content }
 		</div>
 	

@@ -1,11 +1,13 @@
 package com.fdmgroup.GameBlog.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +42,10 @@ public class CommentController {
 		User commenter = userService.findByUsername(username);
 
 		LocalDateTime date = LocalDateTime.now();
+		String dateString = date.toString();
+		dateString.replace("T", " ");
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		date = LocalDateTime.parse(dateString, dateTimeFormatter);
 		
 		Optional<BlogPost> article = blogService.getPostById(articleId);
 		
@@ -55,13 +61,36 @@ public class CommentController {
 	
 	@PostMapping("/removeComment")
 	public String removeComment(ModelMap model, @RequestParam Integer commentId) {
-		
+
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		User LoggedUser = userService.findByUsername(username);
+
 		Comment toDelete = service.findById(commentId);
 		User commenter = toDelete.getCommenter();
-		service.deleteComment(toDelete);		
-		model.addAttribute("comments", service.findAllCommentsFromUser(commenter));
+		BlogPost post = blogService.getPostById(toDelete.getBlogPost().getBlogPostId()).orElse(null);
+
+		if (LoggedUser.equals(commenter)) 
+		{	
+			service.deleteComment(toDelete);
+			List<Comment> comments = service.findAllCommentsFromPost(post);
+			model.addAttribute("comments", comments);
+		    model.addAttribute("blogPost", post);
+			mainController.populateLoggedUserModel(model);
+			return "post";
+		}
+		 else if (LoggedUser.getRole().getRoleName().equals("Admin")) {
+			service.deleteComment(toDelete);
+			model.addAttribute("comments", service.findAllCommentsFromUser(commenter));
+			mainController.populateLoggedUserModel(model);
+			return "commentsOfUser";
+		}
+		
+		model.addAttribute("errorDeleting", "You are not allowed to do that");
+		List<Comment> comments = service.findAllCommentsFromPost(post);
+		model.addAttribute("comments", comments);
+	    model.addAttribute("post", post);
 		mainController.populateLoggedUserModel(model);
-		return "commentsOfUser";
+		return "post";
 	}
 		
 	 @PostMapping("/showAllComments")

@@ -41,8 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-			.antMatchers("/css/**", "/js/**", "/h2/**", "WEB-INF/jsps/**", "/", "/**/*.png", "/**/*.PNG", "/**/*.jpg", "/**/*.JPG", "/register", "/goRegisterPage", "/goQuestionPassword", "/questionPassword", "/resetPassword", "/goToSearchingPage", "/goToFAQ", "/sendMessageToAdmin", "/toPrivacyPolicy", "/toTermsAndConditions", "/goShowProductsOfUser/{username}", "/showOtherUserProfile/{username}", "/goToProductPage/{productId}", "/goToCategory/{category}", "/login", "/toContact", "/toAboutShazar", "/filtered").permitAll()
+			.antMatchers("/css/**", "/js/**", "/h2/**", "WEB-INF/jsps/**", "/", "/**/*.png", "/**/*.PNG", "/**/*.jpg", "/**/*.JPG", "/register",  "/goRegisterPage", "/goQuestionPassword","/posts/{id}", "/questionPassword", "/resetPassword", "/goToSearchingPage", "/goToAbout", "/login", "/toContact" ).permitAll()
 			.antMatchers("/admin/**").hasRole("Admin")
+			.antMatchers("/posts/new", "/posts/{id}/edit", "/posts/{id}/delete").hasAnyRole("Admin","Author")
 			.anyRequest().authenticated()
 			.and()
 		.formLogin().loginPage("/login").permitAll()
