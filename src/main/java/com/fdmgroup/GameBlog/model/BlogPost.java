@@ -29,7 +29,7 @@ public class BlogPost {
 	private LocalDateTime updatedAt;
 	@OneToMany ( mappedBy = "blogPost")
 	private List<Comment>comments;
-	@ManyToMany(mappedBy = "blogLikedBlog")
+	@ManyToMany
 	private List<User> userWhoLiked;
 	//image
 	

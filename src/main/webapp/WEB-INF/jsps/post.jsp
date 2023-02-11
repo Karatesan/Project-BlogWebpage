@@ -47,7 +47,7 @@
 					Commenter: ${comment.commenter.username } date: ${comment.date }<br>
 					
 					<c:choose>
-					<c:when test="${loggedIn == true && user.username.equals(comment.commenter.username}">
+					<c:when test="${loggedIn == true && user.username.equals(comment.commenter.username)}">
 					<form action="/removeComment" method="post">
 						<input type="hidden" name="commentId" value="${comment.commentId}">
 						<input type="submit" name="delete" value="delete comment">
