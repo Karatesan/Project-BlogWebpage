@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,9 +66,8 @@ public class BlogPostController {
 	}
 	
     @GetMapping("/posts/{id}/edit")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_AUTHOR')")
     public String getPostForEdit(@PathVariable Integer id, ModelMap model) {
-
         // find post by id
         Optional<BlogPost> optionalBlogPost = blogPostService.getPostById(id);
         // if post exist put it in model
@@ -78,6 +78,24 @@ public class BlogPostController {
         } else {
             return "404";
         }
+    }
+    
+    @PostMapping("/posts/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_AUTHOR')")
+    public String updatePost(@PathVariable Integer id, BlogPost post, ModelMap model) {
+
+        Optional<BlogPost> optionalBlogPost = blogPostService.getPostById(id);
+        if (optionalBlogPost.isPresent()) {
+            BlogPost existingPost = optionalBlogPost.get();
+            System.out.println(post.getTitle()+"++++++++++++++++ /n +++++++++++++++++");
+            existingPost.setTitle(post.getTitle());
+            System.out.println(post.getContent()+"++++++++++++++++ /n +++++++++++++++++");
+            existingPost.setContent(post.getContent());
+            model.addAttribute("existingPost", existingPost);
+            blogPostService.save(existingPost);
+        }
+
+        return "redirect:/posts/"+id;
     }
 
     @GetMapping("/posts/{id}/delete")
