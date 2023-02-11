@@ -2,7 +2,10 @@ package com.fdmgroup.GameBlog.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,12 +43,10 @@ public class CommentController {
 	public String addComment(ModelMap model, @RequestParam String username, @RequestParam int articleId, @RequestParam String content) {
 		
 		User commenter = userService.findByUsername(username);
-
+		
 		LocalDateTime date = LocalDateTime.now();
-		String dateString = date.toString();
-		dateString.replace("T", " ");
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		date = LocalDateTime.parse(dateString, dateTimeFormatter);
+		DateTimeFormatter dtf = DateTimeFormatter.ISO_DATE_TIME;
+		date= date.truncatedTo(ChronoUnit.MINUTES);
 		
 		Optional<BlogPost> article = blogService.getPostById(articleId);
 		

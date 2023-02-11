@@ -1,13 +1,16 @@
 package com.fdmgroup.GameBlog.model;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "users_table")
@@ -20,7 +23,6 @@ public class User {
 	private String password;
 	private String email;
 	private String answerQuestion;
-
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Role role;

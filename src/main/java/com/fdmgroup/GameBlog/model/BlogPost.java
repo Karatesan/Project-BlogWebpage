@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -28,6 +29,8 @@ public class BlogPost {
 	private LocalDateTime updatedAt;
 	@OneToMany ( mappedBy = "blogPost")
 	private List<Comment>comments;
+	@ManyToMany(mappedBy = "blogLikedBlog")
+	private List<User> userWhoLiked;
 	//image
 	
 	public BlogPost() {
