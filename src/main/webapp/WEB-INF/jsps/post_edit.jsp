@@ -14,21 +14,21 @@
 
 	<br>
 	<div class="form-container">
-	<form action="/posts/${existingPost.blogPostId}" method="post">
+	<form action="/posts/${blogPost.blogPostId}" method="post">
 		<label class="name-box">Edit the post</label><br><br>
 		<input type="hidden" name="authorUsername" value="${ user.username }" /><br>
 		<label class="name-box">Title</label><br><br>
-		<input class="form-field" type="text" name="title" placeholder="Title"/><br>
+		<input class="form-field" type="text" name="title" placeholder="Title" value="${ blogPost.title }"/><br>
 		<label class="name-box">Body of the post</label><br><br>
-		<input class="form-field" type="text" name="content" placeholder="Content"/><br>
+		<input class="form-field" type="text" name="content" placeholder="Content" value="${ blogPost.content }"/><br>
 		<br> 
 		<input class="form-field submit-button2" type="submit" value="Edit post">
 		<br>
 		<br>
+		</form>
 		<form action="/posts/${blogPost.blogPostId}/delete" method="get">
 				<input type="submit" value="Delete post">
 		</form>
-	</form>
 	</div>
 
 	<jsp:include page="footer.jsp" />
