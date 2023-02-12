@@ -1,10 +1,9 @@
 package com.fdmgroup.GameBlog.controller;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
+
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
+
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -73,8 +72,6 @@ public class CommentController {
 		if (LoggedUser.equals(commenter)) 
 		{	
 			service.deleteComment(toDelete);
-			List<Comment> comments = service.findAllCommentsFromPost(post);
-			model.addAttribute("comments", comments);
 		    model.addAttribute("blogPost", post);
 			mainController.populateLoggedUserModel(model);
 			return "post";
@@ -94,20 +91,22 @@ public class CommentController {
 		return "post";
 	}
 		
-	 @PostMapping("/showAllComments")
-	    public String showComments(@PathVariable int postId, ModelMap model) {
-		 
-	        BlogPost post = blogService.getPostById(postId).orElse(null);
-	        if (post == null)
-	            model.addAttribute("showCommentsError", "Error, post doesn't exist.");
-
-	        List<Comment> comments = service.findAllCommentsFromPost(post);
-
-	        model.addAttribute("comments", comments);
-	        model.addAttribute("post", post);
-	        mainController.populateLoggedUserModel(model);
-	        
-	        return "fragments/comments :: commentList";
-	    }
+//	 @PostMapping("/showAllComments")
+//	    public String showComments(@PathVariable int postId, ModelMap model) {
+//		 
+//	        BlogPost post = blogService.getPostById(postId).orElse(null);
+//	        if (post == null) {
+//	            model.addAttribute("showCommentsError", "Error, post doesn't exist.");
+//	            return "index";
+//	        }
+//
+//	        List<Comment> comments = service.findAllCommentsFromPost(post);
+//
+//	        model.addAttribute("comments", comments);
+//	        model.addAttribute("post", post);
+//	        mainController.populateLoggedUserModel(model);
+//	        
+//	        return "fragments/comments :: commentList";
+//	    }
 
 }

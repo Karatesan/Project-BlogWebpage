@@ -42,4 +42,9 @@ public class LikeDislikeService {
 		repo.delete(rating);
 	}
 
+	public List<LikeDislike> findByRatingUser(User username) {
+		
+		return repo.findByRatingUser(username);
+	}
+
 }

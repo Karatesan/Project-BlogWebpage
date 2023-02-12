@@ -15,6 +15,7 @@ import com.fdmgroup.GameBlog.model.User;
 import com.fdmgroup.GameBlog.security.DefaultUserDetailService;
 import com.fdmgroup.GameBlog.service.BlogPostService;
 
+
 @Controller
 public class MainController {
 	
@@ -41,7 +42,8 @@ public class MainController {
 	
 	@GetMapping(value = "/")
 	public String getIndex(ModelMap model) {
-
+		List<BlogPost> listOfTopPosts = blogService.listTopthreePosts();
+		model.addAttribute("topPosts", listOfTopPosts.stream().limit(3).toList());
 		populateLoggedUserModel(model);
 		List<BlogPost>allPosts =  blogService.getAllPosts();
 		model.addAttribute("allPosts", allPosts);

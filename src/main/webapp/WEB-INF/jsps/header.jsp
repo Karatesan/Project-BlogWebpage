@@ -21,6 +21,7 @@
         <div class="logins">
         	<div class="username big-title-font"> ${user.username}</div>
             <a href="/logout" class='button'>Logout</a>
+            <a href="/goToLikedPosts/${user.username}" class='button'>Show Liked Posts</a>
             <c:choose>
 					<c:when test="${user.role.roleName.equals('Admin') }">
              <a href="/admin/listUsers" class='button'>Show all users</a>
@@ -29,6 +30,7 @@
               <c:choose>
 					<c:when test="${user.role.roleName.equals('Admin') || user.role.roleName.equals('Author') }">
               <a href="/posts/new" class='button'>Add New Post</a>
+              <a href="/goToUserPosts/${user.username}" class='button'>Show Your Posts</a>
               </c:when>
               </c:choose>
         </div>

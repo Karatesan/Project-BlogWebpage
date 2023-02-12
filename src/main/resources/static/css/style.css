@@ -471,6 +471,17 @@ a {
 	font-size:15px;
 	color:white;
 }
+
+.blog-container-list {
+	display: flex;
+	flex-direction: column;
+	width: 70%;
+	color: #c477c4;
+	font-weight: 500;
+	margin: 0 auto;
+	text-align:center;
+	
+}
 	
 	
 	

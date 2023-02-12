@@ -15,5 +15,5 @@ public interface LikeDislikeRepository extends JpaRepository<LikeDislike, Intege
 	
 
 	List<LikeDislike> findByRatingUserAndRatedPost(User ratingUser, BlogPost ratedPost);
-
+	List<LikeDislike> findByRatingUser(User ratingUser);
 }

@@ -27,62 +27,32 @@
 
 		<!--Main blog----<img class="name" src="../images/nazwa2.png">--------------------------------------------------------------->
 
-		<div class="main-container">
-			<div class="blog-container">
-				<c:forEach items="${allPosts}" var="blogPost">
-					<a href="/posts/${blogPost.blogPostId }">
+		
+			<div class="blog-container-list">
+			<h1 class="big-title-font">${Title}</h1>
+				<c:forEach items="${likedPosts}" var="likedPost">
+					<a href="/posts/${likedPost.blogPostId }">
 						<div class="blog-entry b1">
 							<div class="blog-image"></div>
 							<div class="blog-text-box">
 								<div class="title">
 
-									<h1 class="big-title-font">${blogPost.title}</h1>
+									<h1 class="big-title-font">${likedPost.title}</h1>
 
-									<h2 class="subtitle subtitle-font">${blogPost.title}</h2>
+									<h2 class="subtitle subtitle-font">${likedPost.title}</h2>
 								</div>
 								<div class="blog-picture-container">
-									<img src=${blogPost.picturePath } />
+									<img src=${likedPost.picturePath } />
 								</div>
 								<div class="contents">
-									<p>${blogPost.content}</p>
+									<p>${likedPost.content}</p>
 								</div>
 							</div>
 						</div>
 					</a>
 				</c:forEach>
-
-
-				<div class="load-older">
-					<a class="money-link">Show Previous</a>
-				</div>
 			</div>
-			<div class="side-menu-container">
-				<div class="title s-title">
-					<a>Highest Rated</a>
-					<c:forEach items="${topPosts}" var="topPost">
-						<a href="/posts/${topPost.blogPostId}">
-							<div class="side-box">
-								<div class="side-title">
-									<h2 class="sidemenu-subtitle-font">${topPost.title }</h2>
-								</div>
-								<div class="side-image"></div>
-							</div>
-						</a>
-					</c:forEach>
-				</div>
-
-			</div>
-		</div>
-
-
-
-		<div class="support-text">
-			<p>IF YOU LIKE IT SUPPORT MY WORK!!</p>
-		</div>
-		<div class="support-box">
-			<a class="money-link"><img class="money"
-				src="../images/money2.png"></a>
-		</div>
+		
 
 		<!--Footer------------------------------------------------------------------->
 

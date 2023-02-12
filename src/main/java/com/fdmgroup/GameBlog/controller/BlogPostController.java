@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fdmgroup.GameBlog.model.BlogPost;
 import com.fdmgroup.GameBlog.model.Comment;
+import com.fdmgroup.GameBlog.model.LikeDislike;
 import com.fdmgroup.GameBlog.model.User;
 import com.fdmgroup.GameBlog.security.DefaultUserDetailService;
 import com.fdmgroup.GameBlog.service.BlogPostService;
@@ -35,6 +36,7 @@ public class BlogPostController {
 	
 	@Autowired
 	MainController mainController;
+
 	
 	@GetMapping("/posts/new")
 	public String createNewPost(ModelMap model) {
@@ -128,4 +130,26 @@ public class BlogPostController {
             return "404";
         }
     }
+    
+    @GetMapping("/goToLikedPosts/{username}")
+    public String goToLikedPosts(ModelMap model, @PathVariable String username) {
+        // find post by id
+    		User loggedUser = defaultUserDetailService.findByUsername(username);
+            model.addAttribute("likedPosts", blogPostService.listLikedPost(loggedUser));
+			mainController.populateLoggedUserModel(model);
+			model.addAttribute("Title", "Posts liked by " + username);
+
+		return "likedPosts";
+        }
+    
+    @GetMapping("/goToUserPosts/{username}")
+    public String goToUserPosts(ModelMap model, @PathVariable String username) {
+        // find post by id
+    		User loggedUser = defaultUserDetailService.findByUsername(username);
+            model.addAttribute("likedPosts", blogPostService.findAllPostsOfUser(loggedUser));
+			mainController.populateLoggedUserModel(model);
+			model.addAttribute("Title", "Posted by " + username);
+
+		return "likedPosts";
+        }
 }
