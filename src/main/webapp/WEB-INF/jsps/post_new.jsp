@@ -19,11 +19,13 @@
 	<span style="color: red">${errorMessage}</span>
 	<br>
 	<div class="form-container">
-	<form action="/posts/new" method="post">
+	<form action="/posts/new" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="authorUsername" value="${ user.username }" /><br>
-		<label class="name-box">Title</label><br>
+		<label class="name-box">Picture: </label><br><br>
+   		<input class="name-box" type="file" name="picture" accept="image/png, image/jpeg" /><br>
+		<label class="name-box">Title</label><br><br>
 		<input class="form-field" type="text" name="title" placeholder="Title"/><br>
-		<label class="name-box">Body of the post</label><br>
+		<label class="name-box">Body of the post</label><br><br>
 		<input class="form-field" type="text" name="content" placeholder="Content"/><br>
 		<br> 
 		<input class="form-field submit-button2" type="submit" value="Add post">

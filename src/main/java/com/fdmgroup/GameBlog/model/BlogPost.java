@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.data.annotation.Transient;
+
 @Entity
 public class BlogPost {
 	
@@ -32,10 +34,11 @@ public class BlogPost {
 	private List<Comment>comments;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<LikeDislike> likesList;
-	//image
+	@Column(name = "picture", length = 64)
+	private String picture;
+
 	
 	public BlogPost() {
-		
 	}
 	
 	public BlogPost(User author, String title, String content, int likes, LocalDateTime postedAt) {
@@ -47,6 +50,16 @@ public class BlogPost {
 		this.postedAt = postedAt;
 	}
 	
+	public BlogPost(User author, String title, String content, int likes, LocalDateTime postedAt,
+					String picture) {
+		super();
+		this.author = author;
+		this.title = title;
+		this.content = content;
+		this.likes = likes;
+		this.picture = picture;
+	}
+
 	public void addComment(Comment comment) {
 		
 		comments.add(comment);
@@ -110,8 +123,6 @@ public class BlogPost {
 		this.updatedAt = updatedAt;
 	}
 	
-	
-
 	public List<Comment> getComments() {
 		return comments;
 	}
@@ -153,10 +164,24 @@ public class BlogPost {
 				&& Objects.equals(updatedAt, other.updatedAt);
 	}
 
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
 	@Override
 	public String toString() {
 		return "BlogPost [blogPostId=" + blogPostId + ", author=" + author + ", title=" + title + ", content=" + content
-				+ ", likes=" + likes + ", postedAt=" + postedAt + ", comments=" + comments + "]";
+				+ ", likes=" + likes + ", postedAt=" + postedAt + ", picture=" + picture + "]";
 	}
 	
+	@Transient
+    public String getPicturePath() {
+        if (picture == null) return null;
+         
+        return "/blogPost-pictures/" + blogPostId + "/" + picture;
+    }
 }
