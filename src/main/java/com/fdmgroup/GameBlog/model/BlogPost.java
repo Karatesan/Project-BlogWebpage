@@ -2,6 +2,7 @@ package com.fdmgroup.GameBlog.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,8 +30,8 @@ public class BlogPost {
 	private LocalDateTime updatedAt;
 	@OneToMany ( mappedBy = "blogPost")
 	private List<Comment>comments;
-	@ManyToMany
-	private List<User> userWhoLiked;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<LikeDislike> likesList;
 	//image
 	
 	public BlogPost() {
@@ -56,6 +57,13 @@ public class BlogPost {
 		comments.remove(comment);
 	}
 	
+	public void ratePost(LikeDislike rate) {
+		likesList.add(rate);
+	}
+	
+	public void removeRate(LikeDislike rate) {
+		likesList.remove(rate);
+	}
 	
 	public Integer getBlogPostId() {
 		return blogPostId;
@@ -110,6 +118,39 @@ public class BlogPost {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	
+
+
+
+	public List<LikeDislike> getLikesList() {
+		return likesList;
+	}
+
+	public void setLikesList(List<LikeDislike> likesList) {
+		this.likesList = likesList;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(author, blogPostId, comments, content, likes, likesList, postedAt, title, updatedAt);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BlogPost other = (BlogPost) obj;
+		return Objects.equals(author, other.author) && Objects.equals(blogPostId, other.blogPostId)
+				&& Objects.equals(comments, other.comments) && Objects.equals(content, other.content)
+				&& likes == other.likes && Objects.equals(likesList, other.likesList)
+				&& Objects.equals(postedAt, other.postedAt) && Objects.equals(title, other.title)
+				&& Objects.equals(updatedAt, other.updatedAt);
 	}
 
 	@Override

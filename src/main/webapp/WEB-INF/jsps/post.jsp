@@ -22,7 +22,9 @@
 		<div class="blog-content-container"> ${blogPost.content }</div>
 		Number of likes : ${blogPost.likes} <br><br>
 		<form action="/likes/${blogPost.blogPostId}" method="post">
-				<input type="submit" value="Like"><br><br>
+				<input type="hidden" name = "username" value="${user.username }">	
+				<input type="submit" name = "rating" value="like">
+				<input type ="submit" name = "rating" value="dislike"><br><br>
 		</form>
 		<c:choose>
 			<c:when test="${user.role.roleName.equals('Admin') || user.role.roleName.equals('Author') }">
