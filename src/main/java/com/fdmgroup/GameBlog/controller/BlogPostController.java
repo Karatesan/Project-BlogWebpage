@@ -92,7 +92,7 @@ public class BlogPostController {
     @PostMapping("/posts/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_AUTHOR')")
     public String updatePost(@PathVariable Integer id, BlogPost post, ModelMap model) {
-    	mainController.populateLoggedUserModel(model);
+    	
     	// checking if logged user, who wants edit post is the author of this post
     	String username = SecurityContextHolder.getContext().getAuthentication().getName();
     	User loggedUser = defaultUserDetailService.findByUsername(username);
