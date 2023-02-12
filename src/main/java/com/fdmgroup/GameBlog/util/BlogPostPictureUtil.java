@@ -9,7 +9,7 @@ import java.nio.file.StandardCopyOption;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class ProductPictureUtil {
+public class BlogPostPictureUtil {
 	public static void savePicture(String uploadDir, String fileName, MultipartFile multipartFile) throws IOException{
 		Path uploadPath = Paths.get(uploadDir);
 		

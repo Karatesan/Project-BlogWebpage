@@ -17,11 +17,13 @@
 	<form action="/posts/${blogPost.blogPostId}" method="post">
 		<label class="name-box">Edit the post</label><br><br>
 		<input type="hidden" name="authorUsername" value="${ user.username }" /><br>
+		<div class="blog-picture-container"> <img src=${blogPost.picturePath } /></div><br>
+		<input class="form-field submit-button2" type="file" id="myFile" name="filename"><br><br>
 		<label class="name-box">Title</label><br><br>
 		<input class="form-field" type="text" name="title" placeholder="Title" value="${ blogPost.title }"/><br>
 		<label class="name-box">Body of the post</label><br><br>
 		<input class="form-field" type="text" name="content" placeholder="Content" value="${ blogPost.content }"/><br>
-		<br> 
+		<br>
 		<input class="form-field submit-button2" type="submit" value="Edit post">
 		<br>
 		<br>

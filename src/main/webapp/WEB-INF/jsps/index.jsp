@@ -43,6 +43,7 @@
 							
 							<h2 class="subtitle subtitle-font">${blogPost.title}</h2>
 						</div>
+						<div class="blog-picture-container"> <img src=${blogPost.picturePath } /></div>
 						<div class="contents">
 							<p>${blogPost.content}</p>
 						</div>

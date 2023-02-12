@@ -18,7 +18,7 @@
 	<div class="blog-post-data">Author: ${blogPost.author.username }  Posted: ${blogPost.postedAt }</div>
 
 	<div class="main-blog-container">
-		<div class="blog-picture-container"> Picture here</div>
+		<div class="blog-picture-container"> <img src=${blogPost.picturePath } /></div>
 		<div class="blog-content-container"> ${blogPost.content }</div>
 		Number of likes : ${blogPost.likes} <br><br>
 		<form action="/likes/${blogPost.blogPostId}" method="post">
