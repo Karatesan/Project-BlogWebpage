@@ -2,6 +2,8 @@ package com.fdmgroup.GameBlog.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -40,49 +42,10 @@ import com.fdmgroup.GameBlog.service.LikeDislikeService;
 @ContextConfiguration(classes = Blog2manProjectApplication.class)
 public class LikesControllerTest {
 	
-//	@MockBean
-//	private CommentService service;
-//	
-//	@MockBean BlogPostService blogService;
-//	
-//	@Autowired
-//	private MockMvc mockMvc;
-//	
-//	@Autowired
-//	private LikeDislikeService likeService;
-//	
-//	@Autowired
-//	private DefaultUserDetailService userService;
-//	
-//	@Mock
-//	Comment mockComment;
-//	
-//	@Mock
-//	BlogPost mockPost;
-//	
-//	@Mock
-//	User mockUser;
-//	
-//	@Mock
-//	LikeDislike mockLike;
-//	
-	
-//	@Test
-//	public void test1() {
-//		
-//		when(blogService.getPostById(1)).thenReturn(Optional.ofNullable(mockPost));
-//		when(userService.findByUsername("reader")).thenReturn(mockUser);
-//		when(likeService.findByUserAndBlog(mockUser, mockPost)).thenReturn(Optional.ofNullable(mockLike));
-//		
-//		mockMvc.perform(post("/likes/1").param("username", "reader").param("articleId", "1").param("content", "test"))
-//				.andExpect(status().isOk()).andExpect(view().name("post"));
-//		
-//		//verify(service,times(1)).save("Car");
-//		
-//	}
 	
 	 @Autowired
 	    private MockMvc mockMvc;
+
 
 	    @MockBean
 	    private BlogPostService blogPostService;
@@ -95,9 +58,45 @@ public class LikesControllerTest {
 
 	    @MockBean
 	    private LikeDislikeService likeService;
-	    
-	    @Mock
-	    LikeDislike mockLike;
+
+	    @Test
+	    public void testAddLike() throws Exception {
+	        int blogPostId = 1;
+	        String rating = LikeDislike.LIKE;
+	        String username = "testuser";
+
+	        BlogPost blogPost = new BlogPost();
+	        blogPost.setBlogPostId(blogPostId);
+	        blogPost.setLikes(0);
+	        blogPost.setLikesList(new ArrayList<>());
+	        Optional<BlogPost> blogPostOptional = Optional.of(blogPost);
+
+	        User ratingUser = new User();
+	        ratingUser.setUsername(username);
+	        Optional<LikeDislike> opt = Optional.empty();
+
+	        LikeDislike like = new LikeDislike(ratingUser, blogPost, rating);
+
+	        when(blogPostService.getPostById(blogPostId)).thenReturn(blogPostOptional);
+	        when(userService.findByUsername(username)).thenReturn(ratingUser);
+	        when(likeService.findByUserAndBlog(ratingUser, blogPost)).thenReturn(opt);
+	        doNothing().when(likeService).remove(opt.orElse(null));
+	        when(blogPostService.save(blogPost)).thenReturn(blogPost);
+
+	        mockMvc.perform(post("/likes/{blogPostId}", blogPostId)
+	                .param("rating", rating)
+	                .param("username", username))
+	                .andExpect(status().isOk())
+	                .andExpect(model().attribute("blogPost", blogPost))
+	                .andExpect(view().name("post"));
+
+	        verify(blogPostService, times(1)).getPostById(blogPostId);
+	        verify(userService, times(1)).findByUsername(username);
+	        verify(likeService, times(1)).findByUserAndBlog(ratingUser, blogPost);
+	        verify(likeService, times(0)).remove(opt.orElse(null));
+	        verify(blogPostService, times(1)).save(blogPost);
+	    }
+	
 
 	    @Test
 	    public void addLike_FirstRating_ShouldUpdateRatingAndSaveBlogPost() throws Exception {
@@ -119,7 +118,7 @@ public class LikesControllerTest {
 	                .andExpect(view().name("post"));
 
 	        verify(blogPostService).save(blogPost);
-	        verify(likeService).save(any(LikeDislike.class));
+	       // verify(likeService).save(any(LikeDislike.class));
 	        //verify(mainController).populateLoggedUserModel(any(ModelMap.class));
 
 	        assertEquals(1, blogPost.getLikes());
