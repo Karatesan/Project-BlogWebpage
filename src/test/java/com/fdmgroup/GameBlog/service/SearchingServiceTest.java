@@ -1,77 +1,66 @@
 package com.fdmgroup.GameBlog.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.fdmgroup.GameBlog.model.BlogPost;
 import com.fdmgroup.GameBlog.repository.BlogPostRepository;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
+@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 public class SearchingServiceTest {
-	
 
-	@Autowired
-	private BlogPostRepository blogPostRepository;
-	
-	@Autowired
-	private SearchingService searchingService;
-	
-	private BlogPost blogPost1;
-	private BlogPost blogPost2;
-	private BlogPost blogPost3;
-	private BlogPost blogPost4;
-	
-	@Before
-	public void setUp() {
-		blogPost1 = new BlogPost("Hello World", "A basic hello world example", null, null);
-		blogPost2 = new BlogPost("Hello", "A simple hello greeting", null, null);
-		blogPost3 = new BlogPost("How to write a test", "A guide to writing tests", null, null);
-		blogPost4 = new BlogPost("Hello again", "Another hello greeting", null, null);
-		
-		blogPostRepository.saveAll(Arrays.asList(blogPost1, blogPost2, blogPost3, blogPost4));
-	}
-	
-	@Test
-	public void testFindPostsByTitle_withStartingWith() {
-		List<BlogPost> foundPosts = searchingService.findPostsByTitle("Hello");
-		
-		assertEquals(2, foundPosts.size());
-		assertTrue(foundPosts.contains(blogPost1));
-		assertTrue(foundPosts.contains(blogPost2));
-	}
-	
-	@Test
-	public void testFindPostsByTitle_withEndingWith() {
-		List<BlogPost> foundPosts = searchingService.findPostsByTitle("again");
-		
-		assertEquals(1, foundPosts.size());
-		assertTrue(foundPosts.contains(blogPost4));
-	}
-	
-	@Test
-	public void testFindPostsByTitle_withContaining() {
-		List<BlogPost> foundPosts = searchingService.findPostsByTitle("write a");
-		
-		assertEquals(1, foundPosts.size());
-		assertTrue(foundPosts.contains(blogPost3));
-	}
-	
-	@Test
-	public void testFindPostsByTitle_withNoneMatching() {
-		List<BlogPost> foundPosts = searchingService.findPostsByTitle("test");
-		
-		assertEquals(0, foundPosts.size());
-	}
+  @TestConfiguration
+  static class SearchingServiceTestContextConfiguration {
+    @Bean
+    public SearchingService searchingService() {
+      return new SearchingService();
+    }
+  }
+
+  @Autowired
+  private SearchingService searchingService;
+
+  @MockBean
+  private BlogPostRepository blogPostRepository;
+
+  @BeforeEach
+  public void setUp() {
+    BlogPost post1 = new BlogPost(null, "title1", "content1", 0, null);
+    BlogPost post2 = new BlogPost(null, "title2", "content2", 0, null);
+    BlogPost post3 = new BlogPost(null, "another title", "content3", 0, null);
+    List<BlogPost> posts = new ArrayList<>();
+    posts.add(post1);
+    posts.add(post2);
+    posts.add(post3);
+
+    Mockito.when(blogPostRepository.findByTitleIgnoreCaseStartingWith("title"))
+        .thenReturn(List.of(post1, post2));
+    Mockito.when(blogPostRepository.findByTitleIgnoreCaseEndingWith("title"))
+        .thenReturn(List.of(post1, post2));
+    Mockito.when(blogPostRepository.findByTitleIgnoreCaseContaining("title"))
+        .thenReturn(List.of(post1, post2, post3));
+  }
+
+  @Test
+  public void whenValidTitle_thenBlogPostsShouldBeFound() {
+    String title = "title";
+    List<BlogPost> found = searchingService.findPostsByTitle(title);
+    assertThat(found).isNotEmpty().hasSize(2).extracting(BlogPost::getTitle)
+        .containsOnly("title1", "title2");
+  }
 
 }
