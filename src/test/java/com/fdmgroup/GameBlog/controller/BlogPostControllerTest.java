@@ -1,29 +1,25 @@
 package com.fdmgroup.GameBlog.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-<<<<<<< Updated upstream
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-=======
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
->>>>>>> Stashed changes
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-<<<<<<< Updated upstream
 import org.mockito.Mockito;
-=======
->>>>>>> Stashed changes
+
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,16 +28,12 @@ import com.fdmgroup.GameBlog.model.BlogPost;
 import com.fdmgroup.GameBlog.model.User;
 import com.fdmgroup.GameBlog.security.DefaultUserDetailService;
 import com.fdmgroup.GameBlog.service.BlogPostService;
-<<<<<<< Updated upstream
+
 import com.fdmgroup.GameBlog.util.BlogPostPictureUtil;
-=======
->>>>>>> Stashed changes
 
 @ExtendWith(MockitoExtension.class)
 public class BlogPostControllerTest {
 
-
-<<<<<<< Updated upstream
 	@Mock
 	private DefaultUserDetailService defaultUserDetailService;
 	
@@ -87,38 +79,5 @@ public class BlogPostControllerTest {
 		
 		assertEquals("index", result);
 	}
-
-=======
-	@InjectMocks
-	BlogPostController blogPostController;
-	
-	@Mock
-	DefaultUserDetailService defaultUserDetailService;
-	
-	@Mock
-	BlogPostService blogPostService;
-	
-	@Mock
-	MainController mainController;
-	
-	@Mock
-	MultipartFile mainMultipartFile;
-	
-	@Test
-	public void saveNewPostTest() throws IOException {
-		User author = new User();
-		when(defaultUserDetailService.findByUsername("username")).thenReturn(author);
-		when(mainMultipartFile.getOriginalFilename()).thenReturn("picture.jpg");
-		ModelMap model = new ModelMap();
-		String result = blogPostController.saveNewPost(model, "title", "content", "username", mainMultipartFile);
-		verify(defaultUserDetailService, times(1)).findByUsername("username");
-		verify(blogPostService, times(1)).savePost(any(BlogPost.class));
-		verify(mainMultipartFile, times(1)).getOriginalFilename();
-		verify(mainController, times(1)).populateLoggedUserModel(model);
-		verify(blogPostService, times(1)).getAllPosts();
-		assertEquals("index", result);
-		assertEquals(model.get("allPosts"), blogPostService.getAllPosts());
-	}
->>>>>>> Stashed changes
 }
 
