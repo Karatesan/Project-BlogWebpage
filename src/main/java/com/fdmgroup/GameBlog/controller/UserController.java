@@ -32,7 +32,7 @@ public class UserController {
 	@GetMapping("/login") 
 	public String goToLogin() {
 		
-		return "login";
+		return "loginPage";
 	}
 	
 	@GetMapping("/login-error") 
@@ -40,7 +40,7 @@ public class UserController {
 		
 		model.addAttribute("errorMessage", "Invalid username or password");
 		
-		return "login";
+		return "loginPage";
 	}
 	
 	@GetMapping("/goRegisterPage")

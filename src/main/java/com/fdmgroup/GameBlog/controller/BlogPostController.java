@@ -49,7 +49,7 @@ public class BlogPostController {
 								@RequestParam String authorUsername, @RequestParam("picture") MultipartFile mainMultipartFile) throws IOException {
 		User author = defaultUserDetailService.findByUsername(authorUsername);
 		LocalDateTime time = LocalDateTime.now();
-		BlogPost newPost = new BlogPost(author, title, content, 0, time, null);
+		BlogPost newPost = new BlogPost(author, title, content, 0, time);
 		String picName = StringUtils.cleanPath(mainMultipartFile.getOriginalFilename());
 		newPost.setPicture(picName);
 		blogPostService.savePost(newPost);
@@ -84,6 +84,7 @@ public class BlogPostController {
 	        // if post exist put it in model
 	        if (optionalBlogPost.isPresent()) {
 	           BlogPost blogPost = optionalBlogPost.get();
+	           blogPost.getPicture();
 	            model.addAttribute("blogPost", blogPost);
 	            return "post_edit";
 	        } else {
