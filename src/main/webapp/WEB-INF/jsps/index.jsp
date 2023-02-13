@@ -65,7 +65,7 @@
 								<div class="side-title">
 									<h2 class="sidemenu-subtitle-font">${topPost.title }</h2>
 								</div>
-								<div class="side-image"></div>
+								<div class="side-image"><img src=${blogPost.picturePath } /></div>
 							</div>
 						</a>
 					</c:forEach>

@@ -50,7 +50,7 @@ public class UserController {
 	}
 		
 	@PostMapping("/register")
-	public String registerUser(@RequestParam String username, @RequestParam String password, @RequestParam String email, @RequestParam String confirmPassword, ModelMap model) {
+	public String registerUser(@RequestParam String username, @RequestParam String password, @RequestParam String confirmPassword, @RequestParam String email, @RequestParam String answerQuestion, ModelMap model) {
 		User userFromDatabase = defaultUserService.findByUsername(username);
 		
 		if(userFromDatabase.getUsername().equals(username) || username.equals("anonymousUser") || username.equals("default username")) {
@@ -63,7 +63,7 @@ public class UserController {
 			return "register";	
 		}
 		
-		User newUser = new User(username, password, email, confirmPassword, null);
+		User newUser = new User(username, password, email, answerQuestion, null);
 				
 		newUser.setRole(roleService.findByRoleName("Reader"));
 		newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
