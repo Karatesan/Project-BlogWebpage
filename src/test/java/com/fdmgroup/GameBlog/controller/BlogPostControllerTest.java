@@ -7,11 +7,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,11 +28,11 @@ import com.fdmgroup.GameBlog.model.BlogPost;
 import com.fdmgroup.GameBlog.model.User;
 import com.fdmgroup.GameBlog.security.DefaultUserDetailService;
 import com.fdmgroup.GameBlog.service.BlogPostService;
+
 import com.fdmgroup.GameBlog.util.BlogPostPictureUtil;
 
 @ExtendWith(MockitoExtension.class)
 public class BlogPostControllerTest {
-
 
 	@Mock
 	private DefaultUserDetailService defaultUserDetailService;
@@ -71,6 +79,5 @@ public class BlogPostControllerTest {
 		
 		assertEquals("index", result);
 	}
-
 }
 
