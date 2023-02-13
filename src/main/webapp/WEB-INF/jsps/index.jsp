@@ -32,7 +32,7 @@
 				<c:forEach items="${allPosts}" var="blogPost">
 					<a href="/posts/${blogPost.blogPostId }">
 						<div class="blog-entry b1">
-							<div class="blog-image"></div>
+							<div class="blog-image"><img src=${blogPost.picturePath } /></div>
 							<div class="blog-text-box">
 								<div class="title">
 
@@ -40,9 +40,7 @@
 
 									<h2 class="subtitle subtitle-font">${blogPost.title}</h2>
 								</div>
-								<div class="blog-picture-container">
-									<img src=${blogPost.picturePath } />
-								</div>
+
 								<div class="contents">
 									<p>${blogPost.content}</p>
 								</div>
@@ -65,7 +63,7 @@
 								<div class="side-title">
 									<h2 class="sidemenu-subtitle-font">${topPost.title }</h2>
 								</div>
-								<div class="side-image"><img src=${blogPost.picturePath } /></div>
+								<div class="side-image"><img src=${topPost.picturePath } /></div>
 							</div>
 						</a>
 					</c:forEach>

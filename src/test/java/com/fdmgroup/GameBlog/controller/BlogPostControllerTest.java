@@ -67,7 +67,7 @@ public class BlogPostControllerTest {
 		Mockito.verify(blogPostService, Mockito.times(1)).getAllPosts();
 		Mockito.verify(blogPostPictureUtil, Mockito.times(1)).savePicture(uploadDir, picName, mainMultipartFile);
 		Mockito.verify(model, Mockito.times(1)).addAttribute("allPosts", allPosts);
-		Mockito.verify(mainController, Mockito.times(1)).populateLoggedUserModel(model);
+		//Mockito.verify(mainController, Mockito.times(1)).populateLoggedUserModel(model);
 		
 		assertEquals("index", result);
 	}

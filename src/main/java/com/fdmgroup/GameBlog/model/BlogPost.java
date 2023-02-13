@@ -59,6 +59,8 @@ public class BlogPost {
 		this.likes = likes;
 		this.picture = picture;
 	}
+	
+	
 
 	public void addComment(Comment comment) {
 		
